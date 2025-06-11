@@ -1,0 +1,43 @@
+.raise-complaint-container {
+    max-width: 390px;
+    margin: auto;
+    padding: 1rem;
+    font-family: sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input, textarea {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    background-color: #055072;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(27, 122, 153);
+}
+
+.status {
+    margin-top: 1rem;
+    color: green;
+}

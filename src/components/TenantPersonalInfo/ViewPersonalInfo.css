@@ -1,0 +1,89 @@
+.profile-container {
+    max-width: 390px;
+    margin: 40px auto;
+    padding: 24px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .avatar-circle {
+    background-color: #e0e0e0;
+    color: #333;
+    font-size: 36px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profile-header h2 {
+    margin: 12px 0 4px;
+    font-size: 22px;
+  }
+  
+  .room-number {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .profile-section h3 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    color: #444;
+  }
+  
+  .info-pair {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .info-pair span {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .info-pair p {
+    margin: 0;
+    color: #555;
+    text-align: right;
+  }
+  
+  .edit-button {
+    margin-top: 24px;
+    width: 100%;
+    padding: 12px;
+    background-color: #055072;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: #357acb;
+  }
+  
+  .loading-message {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 18px;
+    color: #777;
+  }
