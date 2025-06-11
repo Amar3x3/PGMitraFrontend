@@ -2,24 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom'; 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import { BrowserRouter as Browser, Routes, Route, useLocation } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
-import Home from './components/home';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Browser>
-  {/* <Navbar/> */}
-    <Routes>
-      
-      <Route path='/' element={<App/>}></Route>
-      <Route path='/home' element={<Home/>}></Route>
-
-    </Routes>
-    {/* <ScrollToTop/> */}
-    {/* <Footer/> */}
-  </Browser>
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

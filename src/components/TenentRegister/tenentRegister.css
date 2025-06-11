@@ -1,0 +1,116 @@
+.register-title {
+    font-size: 2em;
+    margin-bottom: 10px; 
+    color: #2c3e50;
+}
+
+.register-subtitle {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 30px; 
+    color: #666;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    margin-bottom: 20px;
+}
+
+.register-input::placeholder { 
+    font-size: 0.9em; 
+    color: #999;
+}
+
+.register-input {
+    width: 100%; 
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; 
+    transition: border-color 0.3s ease;
+}
+
+.register-input:focus {
+    border-color: #001e3d; 
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); 
+}
+
+.register-button {
+    width: 100%; 
+    padding: 12px 15px;
+    background-color: #055072;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.register-button:hover {
+    background-color: #055072; 
+}
+
+.register-button:active {
+    transform: translateY(1px); 
+}
+
+
+.register-footer {
+    font-size: 0.9em;
+    color: #666;
+}
+
+
+.register-footer a {
+    color: #007bff; 
+    text-decoration: none; 
+    transition: color 0.3s ease;
+}
+
+.register-footer a:hover {
+    text-decoration: underline;
+    color: #0056b3; 
+}
+
+/* .edit-info-form select { 
+    width: 100%; 
+    padding: 0.5rem; 
+    margin-top: 0.3rem; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+} */
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+select {
+  width: 100%;
+}
+select {
+  border: 1px solid #ddd;
+  background: #fdfdfd;
+  padding: 10px 50px 10px 50px;
+  transition: 0.4s;
+}
+
+select:hover,
+select:focus {
+  background: fff;
+}
+select::picker-icon {
+  color: #055072;
+  transition: 0.4s rotate;
+}
+select:open::picker-icon {
+  rotate: 180deg;
+}
+
+
