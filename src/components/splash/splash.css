@@ -1,0 +1,41 @@
+.splash-container{
+    max-width: 3902px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.splash-content{
+    /* min-height: 70vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: rem;
+}
+
+.splash-img{
+    width: 100%;
+    height: auto;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.splash-title{
+    font-size: 1.4rem;
+    margin-top: 1rem;
+}
+.splash-subtitle{
+    font-size: 1rem;
+    margin-top: 0.2rem;
+}
+
+.splash-start-button{
+    background-color: #055072;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
