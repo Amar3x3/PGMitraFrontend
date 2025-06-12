@@ -2,7 +2,7 @@ import './vendorDashboard.css';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoMdSettings } from "react-icons/io";
-import { FaBed ,  FaHome, FaDoorOpen} from "react-icons/fa";
+import { FaBed, FaHome, FaDoorOpen,  FaBuilding } from "react-icons/fa";
 import { IoPersonCircle } from "react-icons/io5";
 import { MdPeople } from "react-icons/md";
 import { GiTakeMyMoney } from "react-icons/gi";
@@ -15,16 +15,16 @@ import { toast } from 'react-toastify';
 
 const VendorDashboard = () => {
 
-    const{user, logout} = useAuth();
+    const { user, logout } = useAuth();
     const navigate = useNavigate();
 
-         const navItems = [
-            { icon: <FaHome />, label: 'Home', path: '/vendor-dashboard' },
-            { icon: <GiTakeMyMoney />, label: 'Payments', path: '/vendor-payments' },
-            { icon: <MdPeople />, label: 'Members', path: '/vendor-members' },
-            { icon: <FaBed />, label: 'Rooms', path: '/vendor-rooms' },
-        ];
-    
+    const navItems = [
+        { icon: <FaHome />, label: 'Home', path: '/vendor-dashboard' },
+        { icon: <GiTakeMyMoney />, label: 'Payments', path: '/vendor-payments' },
+        { icon: <MdPeople />, label: 'Members', path: '/vendor-members' },
+        { icon: <FaBed />, label: 'Rooms', path: '/vendor-rooms' },
+    ];
+
 
     const recentPayments = [
         { id: 1, name: 'Ethan Carter', room: 'Room 101', amount: '$500' },
@@ -39,10 +39,10 @@ const VendorDashboard = () => {
         </div>
     );
 
-    const PaymentItem = ({name, room, amount }) => (
+    const PaymentItem = ({ name, room, amount }) => (
         <div className="payment-item">
-            <IoPersonCircle className="payment-avatar"/>
-            
+            <IoPersonCircle className="payment-avatar" />
+
             <div className="payment-details">
                 <p className="payment-name">{name}</p>
                 <p className="payment-room">{room}</p>
@@ -55,29 +55,32 @@ const VendorDashboard = () => {
     const handleLogout = () => {
         logout()
         toast.success('Logged out successfully');
-        navigate('/login'); 
+        navigate('/login');
     };
 
     const handlePayClick = () => {
-        navigate('/vendor-payments'); 
+        navigate('/vendor-payments');
     };
 
+    const handlePropertyRooms = () => {
+        navigate('/create-property')
+    }
     const handleManageRooms = () => {
-        navigate('/vendor-rooms');
+        navigate('/create-rooms');
     };
 
     const handleManageMembers = () => {
-        navigate('/vendor-members');
+        navigate('/add-members');
     };
 
 
-  return (
-    <div className="dashboard-container">
+    return (
+        <div className="dashboard-container">
 
             <header className="dashboard-header">
                 <p></p>
                 <h2 className="dashboard-title">My PG</h2>
-                <CgLogOut className="logout-icon" onClick={handleLogout}/>
+                <CgLogOut className="logout-icon" onClick={handleLogout} />
             </header>
 
             <section className="stats-section">
@@ -85,7 +88,7 @@ const VendorDashboard = () => {
                 <StatCard label="Vacant" value="20%" />
             </section>
 
-            
+
             <section className="recent-payments-section">
                 <h2 className="section-title">Recent Payments</h2>
                 <div className="payment-list">
@@ -103,16 +106,17 @@ const VendorDashboard = () => {
             <section className="quick-actions-section">
                 <h2 className="section-title">Quick Actions</h2>
                 <div className="quick-actions-grid">
+                    <QuickActionButton icon={<FaBuilding />} label="Manage Properties" onClick={handlePropertyRooms} />
                     <QuickActionButton icon={<FaBed />} label="Manage Rooms" onClick={handleManageRooms} />
                     <QuickActionButton icon={<MdPeople />} label="Manage Members" onClick={handleManageMembers} />
                     <QuickActionButton icon={<GiTakeMyMoney />} label="Payments" onClick={handlePayClick} />
-                    
+
                 </div>
             </section>
 
-            <BottomNavBar links={navItems}/>
+            <BottomNavBar links={navItems} />
         </div>
-  );
+    );
 }
 
 export default VendorDashboard;
