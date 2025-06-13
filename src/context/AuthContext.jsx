@@ -49,19 +49,24 @@ export const AuthProvider = ({ children }) => {
           const response = await api.post('/auth/login', credentials);
           const { accessToken, refreshToken, userId } = response.data;
           
+          localStorage.setItem('userId', userId);
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('refreshToken', refreshToken);
           localStorage.setItem('userId', userId);
 
           const decodedUser = decodeToken(accessToken);
+
           setUser(decodedUser);
-          
           return decodedUser;
+
+
+
         } catch (err) {
           console.error("Login failed:", err.response?.data?.message || err.message);
           setError(err.response?.data?.message || "Login failed. Please check your credentials.");
           throw err;
         }
+
       };
 
       const registerOwner = async (ownerData) => {
