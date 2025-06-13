@@ -53,12 +53,22 @@
     color: rgb(199, 8, 8);
 }
 
+.splash-img{
+    width: 100%;
+    /* height: auto; */
+    max-width: 360px;
+    /* margin: 0 auto; */
+    position: relative;
+    bottom: 3rem;
+
+}
 
 .stats-section {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px; 
-    margin-bottom: 30px;
+    /* display: flex;
+    justify-content: space-between; */
+    /* gap: 15px;  */
+  
+    
 }
 
 .stat-card {
@@ -89,13 +99,16 @@
     font-size: 1.2em;
     font-weight: 600;
     color: #055072;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     text-align: left;
 }
 
 
 .recent-payments-section {
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
+    /* position: relative;
+    bottom: 5rem; */
+    margin-top: -5rem;
     
 }
 
