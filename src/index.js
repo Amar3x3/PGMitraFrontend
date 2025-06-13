@@ -5,6 +5,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom'; 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import Modal from 'react-modal'; 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,6 +16,7 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+Modal.setAppElement('#root');
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

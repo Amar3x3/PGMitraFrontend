@@ -18,9 +18,12 @@ const Login = () => {
 
         try {
             const loggedInUser = await login({ username, password });
+
+            
             if (loggedInUser) {
                 if (loggedInUser.role === 'OWNER') {
                     toast.success(`Welcome ${username}`);
+                    console.log(loggedInUser);
                     navigate('/vendor-dashboard');
                 } else if (loggedInUser.role === 'TENANT') {
                     toast.success(`Welcome ${username}`);
