@@ -3,6 +3,7 @@ import axios from 'axios';
 import './OwnerDiningMenu.css';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import api from '../../services/authApi';
 
 function OwnerDiningMenu() {
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -15,8 +16,10 @@ function OwnerDiningMenu() {
     });
     const [message, setMessage] = useState('');
     const [isEditing, setIsEditing] = useState(false); // New state for edit mode
-    const ownerId = 1;
     const navigate = useNavigate();
+
+    const ownerId = localStorage.getItem('userId');
+    const accessToken = localStorage.getItem('accessToken');
 
 
     useEffect(() => {
@@ -29,20 +32,21 @@ function OwnerDiningMenu() {
 
     const fetchMenu = async (date) => {
         try {
-            const res = await axios.get(`http://localhost:1234/api/Dining/owner/1?date=${date}`);
+            const ownerId = localStorage.getItem('userId'); 
+            const res = await api.get(`/Dining/owner/${ownerId}?date=${date}`);
             setMenu(res.data);
-            // When fetching, if a menu exists, populate formData for potential editing
             setFormData({
                 breakfast: res.data.breakfast,
                 lunch: res.data.lunch,
                 dinner: res.data.dinner,
             });
             setMessage('');
-            setIsEditing(false); // Reset editing mode when a new menu is fetched
+            setIsEditing(false); 
         } catch (err) {
+            console.error("Error fetching menu:", err); 
             setMenu(null);
             setMessage('No menu available for this date.');
-            setFormData({ breakfast: '', lunch: '', dinner: '' }); // Clear formData if no menu
+            setFormData({ breakfast: '', lunch: '', dinner: '' }); 
             setIsEditing(false); // Ensure editing mode is off
         }
     };
@@ -53,15 +57,18 @@ function OwnerDiningMenu() {
 
     const handleAddOrUpdate = async () => {
         try {
-            if (menu && menu.id) { // If menu exists, it's an update
-                await axios.post(`http://localhost:1234/api/Dining/edit`, { // Assuming your update endpoint is /api/Dining/update/:id
-                    id : menu.id, // Include ownerId if required by your backend for updates
-                    date: selectedDate, // Include date if required
+            const ownerId = localStorage.getItem('userId'); 
+    
+            if (menu && menu.id) { 
+                await api.post(`/Dining/edit`, { 
+                    id: menu.id,
+                    ownerId, 
+                    date: selectedDate, 
                     ...formData,
                 });
                 setMessage('Menu updated successfully!');
-            } else { // No menu exists, so it's a create
-                await axios.post('http://localhost:1234/api/Dining/create', {
+            } else { 
+                await api.post('/Dining/create', {
                     ownerId,
                     date: selectedDate,
                     ...formData,
@@ -69,8 +76,8 @@ function OwnerDiningMenu() {
                 setMessage('Menu added successfully!');
             }
             setShowModal(false);
-            setIsEditing(false); // Exit editing mode after submit
-            fetchMenu(selectedDate); // Refresh the menu
+            setIsEditing(false); 
+            fetchMenu(selectedDate); 
         } catch (err) {
             setShowModal(false);
             setMessage(`Error ${menu ? 'updating' : 'adding'} menu.`);

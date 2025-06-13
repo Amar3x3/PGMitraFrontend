@@ -1,0 +1,144 @@
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 15px;
+    box-sizing: border-box;
+    /* background-color: #f0f2f5; */
+    padding-bottom: 80px; 
+}
+
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    margin-top: -0.4rem;
+}
+
+.dashboard-header p {
+    display: none;
+ 
+}
+
+
+.dashboard-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    margin: 0 auto;
+    flex-grow: 1; 
+    text-align: center;
+    margin-left: 2rem;
+}
+
+.logout-icon {
+    font-size: 1.8em;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s ease;
+    position: relative;
+    top: 2px;
+    right: 0px;
+    float: right;
+}
+
+.logout-icon:hover {
+    color: rgb(199, 8, 8);
+}
+
+
+.stats-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; 
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align:left;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 8px;
+    margin-top: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0;
+}
+
+
+.section-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #055072;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+
+.recent-payments-section {
+    margin-bottom: 15px;
+    
+}
+
+.payment-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 23px;
+    /* padding: 15px 20px; */
+}
+
+.payment-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    background-color: white;
+}
+
+.payment-details {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.payment-name {
+    font-weight: 600;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.payment-room {
+    font-size: 0.85em;
+    color: #888;
+    margin: 3px 0 0 0;
+}
+
+.payment-amount {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #055072; 
+}

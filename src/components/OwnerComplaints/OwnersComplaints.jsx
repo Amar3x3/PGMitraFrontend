@@ -3,6 +3,7 @@ import axios from 'axios';
 import './OwnersComplaints.css';
 import { FaExclamationCircle, FaCheckCircle, FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import api from '../../services/authApi';
 
 
 const OwnerComplaints = () => {
@@ -12,6 +13,9 @@ const OwnerComplaints = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // 'success' or 'error'
   const navigate=useNavigate();
+
+  const ownerId = localStorage.getItem('userId');
+  const accessToken = localStorage.getItem('accessToken');
 
 
   useEffect(() => {
@@ -31,38 +35,48 @@ const OwnerComplaints = () => {
     //navigate('/tenant-dashboard');
   };
 
-  const fetchFeedbacks = async () => {
+  
+  const fetchFeedbacks = async (ownerId) => { 
     try {
-      const response = await axios.get('http://localhost:1234/api/vendor/complaints/1');
-      const allFeedbacks = response.data;
+        
+        const response = await api.get(`/vendor/complaints/${ownerId}`);
 
-      const pending = allFeedbacks.filter(item => item.status.toUpperCase() === 'PENDING');
-      const complete = allFeedbacks.filter(item => item.status.toUpperCase() === 'COMPLETE');
+        const allFeedbacks = response.data; 
 
-      setPendingFeedbacks(pending);
-      setCompleteFeedbacks(complete);
+        const pending = allFeedbacks.filter(item => item.status.toUpperCase() === 'PENDING');
+        const complete = allFeedbacks.filter(item => item.status.toUpperCase() === 'COMPLETE');
 
-      if (allFeedbacks.length === 0) {
-        showMessage('No complaints found.', 'error');
-      }
+        setPendingFeedbacks(pending);
+        setCompleteFeedbacks(complete);
+
+        if (allFeedbacks.length === 0) {
+            showMessage('No complaints found.', 'info'); 
+        }
     } catch (error) {
-      console.error('Error fetching complaints:', error);
-      showMessage('Failed to fetch complaints.', 'error');
+        console.error('Error fetching complaints:', error);
+        
+        showMessage('Failed to fetch complaints.', 'error');
+        setPendingFeedbacks([]); 
+        setCompleteFeedbacks([]); 
     }
-  };
+};
 
   const markAsComplete = async (id) => {
     try {
-      await axios.put(`http://localhost:1234/api/vendor/complaints/${id}/complete`);
-      setPendingFeedbacks(prev => prev.filter(item => item.id !== id));
-      const completedItem = pendingFeedbacks.find(item => item.id === id);
-      setCompleteFeedbacks(prev => [...prev, { ...completedItem, status: 'COMPLETE' }]);
-      showMessage('Complaint marked as complete.', 'success');
+        
+        await api.put(`/vendor/complaints/${id}/complete`, {});
+
+        setPendingFeedbacks(prev => prev.filter(item => item.id !== id));
+        const completedItem = pendingFeedbacks.find(item => item.id === id);
+        if (completedItem) {
+            setCompleteFeedbacks(prev => [...prev, { ...completedItem, status: 'COMPLETE' }]);
+        }
+        showMessage('Complaint marked as complete.', 'success');
     } catch (error) {
-      console.error('Error marking complaint as complete:', error);
-      showMessage('Failed to mark as complete.', 'error');
+        console.error('Error marking complaint as complete:', error);
+        showMessage('Failed to mark as complete.', 'error');
     }
-  };
+};
 
   return (
     <div className="owner-complaints-container">

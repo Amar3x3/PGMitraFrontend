@@ -3,11 +3,13 @@ import './EditPersonalInfo.css';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import api from '../../services/authApi';
 
 
 const EditPersonalInfo = () => {
   const navigate = useNavigate();
-  const tenantId = 2;//localStorage.getItem('tenantId');    change when auth done
+  const tenantId = localStorage.getItem('userId'); 
+  const accessToken = localStorage.getItem('accessToken');   
   const [tenant, setTenant] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -25,29 +27,60 @@ const EditPersonalInfo = () => {
   });
 
 
+
+  // useEffect(() => {
+  //   axios.get(`http://localhost:1234/api/tenant/profile/id/${tenantId}`, {
+  //     headers : {
+  //       'Authorization': `Bearer ${accessToken}`
+  //     }
+  //   })
+  //     .then(res => {
+  //       const data = res.data;
+  //       setTenant(data);
+  //       setFormData({
+  //         name: data.name,
+  //         phone: data.phone,
+  //         gender: data.gender,
+  //         foodPreference: data.foodPreference,
+  //         emergencyContactName: data.emergencyContactName,
+  //         emergencyContactPhone: data.emergencyContactPhone,
+  //         occupation: data.occupation,
+  //       });
+  //       setReadOnlyData({
+  //         email: data.email,
+  //         aadhaarNumber: data.aadhaarNumber,
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.error('Error fetching tenant info:', err);
+  //     });
+  // }, [tenantId]);
+
   useEffect(() => {
-    axios.get(`http://localhost:1234/api/tenant/profile/id/${tenantId}`)
-      .then(res => {
-        const data = res.data;
-        setTenant(data);
-        setFormData({
-          name: data.name,
-          phone: data.phone,
-          gender: data.gender,
-          foodPreference: data.foodPreference,
-          emergencyContactName: data.emergencyContactName,
-          emergencyContactPhone: data.emergencyContactPhone,
-          occupation: data.occupation,
+    
+    api.get(`/tenant/profile/id/${tenantId}`)
+        .then(res => {
+            const data = res.data;
+            setTenant(data);
+            setFormData({
+                name: data.name,
+                phone: data.phone,
+                gender: data.gender,
+                foodPreference: data.foodPreference,
+                emergencyContactName: data.emergencyContactName,
+                emergencyContactPhone: data.emergencyContactPhone,
+                occupation: data.occupation,
+            });
+            setReadOnlyData({
+                email: data.email,
+                aadhaarNumber: data.aadhaarNumber,
+            });
+        })
+        .catch(err => {
+            console.error('Error fetching tenant info:', err);
+            
         });
-        setReadOnlyData({
-          email: data.email,
-          aadhaarNumber: data.aadhaarNumber,
-        });
-      })
-      .catch(err => {
-        console.error('Error fetching tenant info:', err);
-      });
-  }, [tenantId]);
+}, [tenantId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,17 +91,33 @@ const EditPersonalInfo = () => {
     navigate('/view-personal-info');
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   axios.put(`http://localhost:1234/api/tenant/update/${tenantId}`, formData, {
+  //     headers: {
+  //       'Authorization':`Bearer ${accessToken}`
+  //     }
+  //   })
+  //     .then(() => {
+  //       alert('Your information has been updated successfully.');
+  //     })
+  //     .catch(err => {
+  //       console.error('Error updating tenant info:', err);
+  //       alert('Failed to update information.');
+  //     });
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:1234/api/tenant/update/${tenantId}`, formData)
-      .then(() => {
-        alert('Your information has been updated successfully.');
-      })
-      .catch(err => {
-        console.error('Error updating tenant info:', err);
-        alert('Failed to update information.');
-      });
-  };
+    api.put(`/tenant/update/${tenantId}`, formData)
+        .then(() => {
+            alert('Your information has been updated successfully.');
+        })
+        .catch(err => {
+            console.error('Error updating tenant info:', err);
+            alert('Failed to update information.');
+        });
+};
 
   if (!tenant) return <div>Loading...</div>;
 

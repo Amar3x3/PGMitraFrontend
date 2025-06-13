@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import './OwnerAnnouncements.css';
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import api from "../../services/authApi";
 
 const Complaint = () => {
     const [title, setTitle] = useState('');
@@ -20,36 +21,28 @@ const Complaint = () => {
         }, 3000);
     };
 
-    const handleSubmit = async (e) =>
-    {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
-            const owner_id = 1;//localStorage.getItem('tenantId'); fetch from correct source, hardcoded now for testing.
-
-            const response = await fetch(`http://localhost:1234/api/vendor/announcement`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({owner_id,title, text : description}),
+            const owner_id = localStorage.getItem('userId');
+            
+            const response = await api.post(`/vendor/announcement`, {
+                owner_id,
+                title,
+                text: description
             });
-
-            if (response.ok) {
-                showMessage('Announcement submitted succesfully!');
-                setTitle('');
-                setDescription('');
-                fetchAnnouncements();
-
-
-            } else {
-                showMessage('Failed to submit announcement.');
-            }
-        } catch(error) {
-            console.error('Error:',error);
-            showMessage('Something went wrong!');
+    
+            showMessage('Announcement submitted successfully!');
+            setTitle('');
+            setDescription('');
+            fetchAnnouncements();
+    
+        } catch (error) {
+            
+            console.error('Error:', error);
+            showMessage('Something went wrong! Failed to submit announcement.');
         }
-
     };
 
     useEffect(() => {
@@ -57,20 +50,25 @@ const Complaint = () => {
         fetchAnnouncements();
     }, []);
 
+
     const fetchAnnouncements = async () => {
         try {
-            const response = await fetch('http://localhost:1234/api/announcement/owner/1');
-            const data = await response.json();
-
+            const ownerId = localStorage.getItem('userId');
+            
+            const response = await api.get(`/announcement/owner/${ownerId}`);
+    
+            const data = response.data;
+    
             if (Array.isArray(data)) {
                 setAnnouncements(data);
-            }
-            else {
-                console.warn("No announcements.");
-                setAnnouncements([]);
+            } else {
+                console.warn("No announcements or unexpected data format.");
+                setAnnouncements([]); 
             }
         } catch (err) {
             console.error('Error fetching announcements:', err);
+            
+            setAnnouncements([]); 
         } finally {
             setLoading(false);
         }

@@ -10,6 +10,10 @@ form {
     flex-direction: column;
 }
 
+.complaint-title, .complaint-text {
+    display: flex;
+    justify-content: center;
+}
 label {
     margin-top: 1rem;
     margin-bottom: 0.5rem;

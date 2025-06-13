@@ -5,21 +5,13 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { BrowserRouter as Browser, Routes, Route, useLocation, BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
-import Home from './components/home';
-import Complaint from './components/TenantComplaints/Complaint';
-import Announcements from './components/TenantAnnouncements/Announcements';
-import FoodMenu from './components/TenantFoodMenu/FoodMenu';
-import EditPersonalInfo from './components/TenantPersonalInfo/EditPersonalInfo';
-import ViewPersonalInfo from './components/TenantPersonalInfo/ViewPersonalInfo';
-import TenantDashboard from './components/TenantDashboard/TenantDashboard';
-import OwnerComplaints from './components/OwnerComplaints/OwnersComplaints';
-import OwnerDiningMenu from './components/OwnerDiningMenu/OwnerDiningMenu';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App></App>
+      <App />
     </BrowserRouter>
   </React.StrictMode>
 );

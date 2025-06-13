@@ -4,12 +4,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"; 
 import { FaEnvelope, FaHome, FaFileAlt, FaComments, FaPhone, FaVenusMars, FaUtensils, FaBriefcase, FaIdCard, FaUserShield, FaArrowLeft } from "react-icons/fa";
 import BottomNav from "../BottomNav";
+import BottomNavBar from "../BottomNavbar/bottomNav";
 import { MdRestaurantMenu } from "react-icons/md";
+import api from "../../services/authApi";
 
-const ViewPersonalInfo = () => { const [tenant, setTenant] = useState(null); 
+const ViewPersonalInfo = () => 
+    { const [tenant, setTenant] = useState(null); 
     const navigate = useNavigate(); 
-    const tenantId = 2; // Replace with dynamic ID if needed
-
+    const tenantId = localStorage.getItem('userId'); // Replace with dynamic ID if needed
+    const accessToken = localStorage.getItem('accessToken');
+    
     const bottomNavLinks = [
         {icon:<FaHome/>, label:"Home", path:"/tenant-dashboard"},
         //{icon:<FaFileAlt/>, label:"Payments", path:"/payment-dashboard"},
@@ -18,7 +22,13 @@ const ViewPersonalInfo = () => { const [tenant, setTenant] = useState(null);
         {icon:<MdRestaurantMenu/>, label:"Menu", path:"/food-menu"},
 
     ]
-    useEffect(() => { axios.get(`http://localhost:1234/api/tenant/profile/id/${tenantId}`).then((res) => setTenant(res.data)) .catch((err) => console.error("Error fetching tenant data:", err)); }, []);
+    // useEffect(() => { axios.get(`http://localhost:1234/api/tenant/profile/id/${tenantId}`, {headers: {'Authorization' : `Bearer ${accessToken}`}}).then((res) => setTenant(res.data)) .catch((err) => console.error("Error fetching tenant data:", err)); }, [accessToken,tenantId]);
+
+    useEffect(() => {
+        api.get(`/tenant/profile/id/${tenantId}`)
+            .then((res) => setTenant(res.data))
+            .catch((err) => console.error("Error fetching tenant data:", err));
+    }, [tenantId]); 
 
     if (!tenant) { return <div className="loading-message">Loading profile...</div>; }
 
@@ -28,13 +38,21 @@ const ViewPersonalInfo = () => { const [tenant, setTenant] = useState(null);
 
     return ( 
     <div className="profile-container"> 
+        <div className="profile-header-pro">
+                <button className='back-button' onClick={handleBack}>
+                    <FaArrowLeft size={16}/>    
+                </button>
+                {/* <IoIosArrowBack className="back-arrow" onClick={handleBack} /> */}
+                <h2>Profile</h2>
+        </div>
         <button className='back-button' onClick={handleBack}>
             <FaArrowLeft size={24}/>
         </button>  
         <div className="profile-header"> 
             <div className="avatar-circle">👤</div> 
             <h2>{tenant.name}</h2> 
-            <p className="room-number">Room {tenant.roomNumber || "203"}</p> 
+            <p className="room-number">Room {tenant.roomNumber || "Room not assigned."}</p> 
+            <p className="p-num">Id: {tenantId}</p>
         </div>
 
         <div className="profile-section">
@@ -64,7 +82,7 @@ const ViewPersonalInfo = () => { const [tenant, setTenant] = useState(null);
                 <p>{tenant.emergencyContactName}</p>
             </div>
             <div className="info-pair">
-                <span><FaPhone className="icon" /> Emergency Contact Phone:</span>
+                <span><FaPhone className="icon" /> Emergency Contact Ph.:</span>
                 <p>{tenant.emergencyContactPhone}</p>
             </div>
             <div className="info-pair">
@@ -74,7 +92,7 @@ const ViewPersonalInfo = () => { const [tenant, setTenant] = useState(null);
         </div>
 
         <button className="edit-button" onClick={() => navigate("/edit-personal-info")}>Edit Info</button>
-        <BottomNav links={bottomNavLinks}></BottomNav>
+        <BottomNavBar links={bottomNavLinks}/>
     </div>
 
     ); 

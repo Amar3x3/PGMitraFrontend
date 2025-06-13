@@ -1,5 +1,6 @@
 .profile-container {
     max-width: 390px;
+    min-width: 300px;
     margin: 40px auto;
     padding: 24px;
     border-radius: 12px;
@@ -32,9 +33,10 @@
     font-size: 22px;
   }
   
-  .room-number {
+  .room-number, .p-num {
     color: #666;
     font-size: 14px;
+    margin: 5px;
   }
   
   .profile-section h3 {
@@ -62,6 +64,7 @@
     margin: 0;
     color: #555;
     text-align: right;
+
   }
   
   .edit-button {
