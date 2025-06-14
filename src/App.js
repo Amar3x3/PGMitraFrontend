@@ -22,14 +22,11 @@ import PropertyList from './components/PropertyCreation/propertyList';
 import RoomDetailsPage from './components/RoomDetails/roomdetails';
 
 
-<<<<<<< Updated upstream
 
 
-=======
 import { RoleProvider } from './RoleContext/RoleContext';
 import TenantManager from './components/TenantCreation/tenantManager';
 import PaymentList from './components/PaymentsList/paymentsList';
->>>>>>> Stashed changes
 
 function App() {
 
