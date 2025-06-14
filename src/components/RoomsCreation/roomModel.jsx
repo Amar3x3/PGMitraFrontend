@@ -2,41 +2,31 @@ import './roomModel.css';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
-import useAuth from '../../hooks/useAuth';
+// import useAuth from '../../hooks/useAuth';
 import { useParams , useNavigate } from 'react-router-dom';
 import vendorService from '../../services/vendorService';
 
 
 const RoomModal = ({ isOpen, onRequestClose, onRoomAdded }) => {
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   const { propertyId } = useParams();
   const navigate = useNavigate();
   
 
-  const vendorId = localStorage.getItem('userId');
+  // const vendorId = localStorage.getItem('userId');
   const vendorAccessToken = localStorage.getItem('accessToken');
-
-  // const [roomNumber, setroomNumber] = useState('');
-  // const [capacity, setCapacity] = useState('');
-  // const [rent, setRent] = useState('');
-  // const [status, setstatus] = useState('Available');
 
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState('');
 
   const [formData, setFormData] = useState({
-    roomNumber: '',
+    room_no: '',
     capacity: '',
     rent:'',
-    status:'Available'
+    occupied:''
   });
-
-  const handleRequestCloseAndNavigate = () => {
-    onRequestClose();
-    navigate(-1);
-  };
 
 
   const handleChange = (e) => {
@@ -48,13 +38,12 @@ const RoomModal = ({ isOpen, onRequestClose, onRoomAdded }) => {
   };
 
 
-  
   const handleSubmit = async (e) => {
 
     e.preventDefault();
     setFormError('');
 
-    if (!formData.roomNumber.trim() || !formData.capacity || !formData.rent) {
+    if (!formData.room_no.trim() || !formData.capacity || !formData.rent) {
       setFormError('Room Number, Capacity, and Rent are required.');
       toast.error('Please fill in all required fields.');
       return;
@@ -69,6 +58,8 @@ const RoomModal = ({ isOpen, onRequestClose, onRoomAdded }) => {
       toast.error('Rent must be a positive number.');
       return;
     }
+
+    
 
     if (!propertyId) {
       setFormError('Error: Property ID not found in URL. Cannot add room.');
@@ -92,35 +83,33 @@ const RoomModal = ({ isOpen, onRequestClose, onRoomAdded }) => {
       const newRoom = await vendorService.createRoom(propertyId, formData, vendorAccessToken);
 
       onRoomAdded(newRoom); 
-
-      setFormData({ roomNumber: '', capacity: '', status: 'Available', rent: ''  }); 
-      handleRequestCloseAndNavigate();
+      setFormData({ room_no: '', capacity: '', occupied: '', rent: ''  }); 
+      onRequestClose();
   
 
     }
     catch (error) {
-      console.error('Error adding Room:', error);
       setFormError(error.message || 'Failed to add Room. Please try again.');
       toast.error(error.message || 'Failed to add Room.');
     } finally {
       setLoading(false);
     }
-  }
-
+  };
+  
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={handleRequestCloseAndNavigate}
+      onRequestClose={onRequestClose}
       contentLabel="Add New Room"
     >
       <h2>Add New Room</h2>
       <form onSubmit={handleSubmit} className='form-add-property'>
         <div>
-          <label htmlFor="roomNumber" className='form-name-label-property'>Room Number:</label>
+          <label htmlFor="room_no" className='form-name-label-property'>Room Number:</label>
           <input
             type="text"
-            id="roomNumber"
-            value={formData.roomNumber}
+            id="room_no"
+            value={formData.room_no}
             onChange={handleChange}
             className='form-name-in-property'
             disabled={loading}
@@ -155,20 +144,18 @@ const RoomModal = ({ isOpen, onRequestClose, onRoomAdded }) => {
           />
         </div>
         <div>
-          <label htmlFor="status" className='form-name-label-property'>status:</label>
-          <select
-            id="status"
-            value={formData.status}
+          <label htmlFor="occupied" className='form-name-label-property'>Number of Beds Occupied:</label>
+          <input
+            type="number"
+            id="occupied"
+            value={formData.occupied}
             onChange={handleChange}
             className='form-name-in-property'
             disabled={loading}
             required
-          >
-            <option value="Available">Available</option>
-            <option value="status">status</option>
-            <option value="Under Maintenance">Under Maintenance</option>
-          </select>
+          />
         </div>
+      
 
         {formError && <p className='property-form-error'>{formError}</p>}
 
@@ -182,7 +169,7 @@ const RoomModal = ({ isOpen, onRequestClose, onRoomAdded }) => {
           </button>
           <button
             type="button"
-            
+            onClick={onRequestClose}
             
             className='btn1-add btn2-can'
             disabled={loading}
