@@ -1,6 +1,19 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import React from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import logo from './logo.svg';
 import './App.css';
+
+import Complaint from './components/TenantComplaints/Complaint';
+import Announcements from './components/TenantAnnouncements/Announcements';
+import FoodMenu from './components/TenantFoodMenu/FoodMenu';
+import EditPersonalInfo from './components/TenantPersonalInfo/EditPersonalInfo';
+import ViewPersonalInfo from './components/TenantPersonalInfo/ViewPersonalInfo';
+import TenantDashboard from './components/TenantDashboard/TenantDashboard';
+import OwnerComplaints from './components/OwnerComplaints/OwnersComplaints';
+import OwnerDiningMenu from './components/OwnerDiningMenu/OwnerDiningMenu';
+import OwnerAnnouncements from './components/OwnerAnnouncements/OwnerAnnouncements';
+
 import Splash from './components/splash/splash';
 import Login from './components/Login/login';
 import VendorRegister from './components/VendorRegister/vendorRegister';
@@ -20,8 +33,7 @@ import RoomManager from './components/RoomsCreation/roomManage';
 import { PropertyProvider } from './components/contexts/PropertyContext';
 
 
-
-
+import { RoleProvider } from './RoleContext/RoleContext';
 
 function App() {
 
@@ -37,6 +49,7 @@ function App() {
     toast.success("Added a member!")
   }
   return (
+    <RoleProvider>
     <div className="App">
       <header className="App-header">
         <PropertyProvider>
@@ -49,7 +62,15 @@ function App() {
               <Route path="/vendor-register" element={<VendorRegister />} />
               <Route path="/tenent-register" element={<TenentRegister />} />
               <Route path="/vendor-dashboard" element={<VendorDashboard />} />
-              <Route path="/tenent-dashboard" element={<TenentDashboard />} />
+              <Route path='/raise-request' element={<Complaint/>}></Route>
+              <Route path='/announcements' element={<Announcements></Announcements>}></Route>
+              <Route path='/food-menu' element={<FoodMenu/>}></Route>
+              <Route path='/edit-personal-info' element={<EditPersonalInfo></EditPersonalInfo>}></Route>
+              <Route path='/view-personal-info' element={<ViewPersonalInfo/>}></Route>
+              <Route path='/tenant-dashboard' element={<TenantDashboard/>}></Route>
+              <Route path='/owners-complaints' element={<OwnerComplaints/>}></Route>
+              <Route path='/owners-menu' element={<OwnerDiningMenu></OwnerDiningMenu>}></Route>
+              <Route path='/owners-announcement' element={<OwnerAnnouncements/>}></Route>
               <Route path="/create-property" element={<PropertyManage />} />
               <Route path='/create-rooms' element={<RoomManager />} />
               <Route path='/vendor/room/:propertyId' element ={<RoomManager />}/>
@@ -64,7 +85,9 @@ function App() {
 
       </header>
     </div>
+    </RoleProvider>
 
+    
   );
 }
 

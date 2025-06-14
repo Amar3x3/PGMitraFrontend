@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom'; 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { BrowserRouter as Browser, Routes, Route, useLocation, BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import Modal from 'react-modal'; 
 

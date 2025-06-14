@@ -1,0 +1,109 @@
+.owner-complaints-container {
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+  
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+  
+.notification {
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-buttons button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #e3c3c3;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.tab-buttons button.active {
+    background-color: #055072;
+    color: white;
+}
+
+.complaints-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.complaint-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.complaint-card.complete {
+    background-color: #e6ffe6;
+    border-color: #88cc88;
+}
+
+.complaint-title {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #444;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.complaint-text {
+    margin-bottom: 12px;
+    line-height: 1.4;
+    color: #555;
+}
+
+.complete-button {
+    background-color: #055072;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.complete-button:hover {
+    background-color: #218838;
+}
+
+.icon {
+    color: #007bff;
+    font-size: 1.2em;
+}
