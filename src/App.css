@@ -1,3 +1,9 @@
+:root {
+  --app-background-color: #def2fb; /* Default background color */
+  /* Add smooth transition for the background */
+  transition: background-color 0.5s ease;
+}
+
 .App {
   max-width: 370px;
   margin: 1rem auto;
@@ -8,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #def2fb;
+  background-color: var(--app-background-color);
   min-height: 80vh;
   display: flex;
   flex-direction: column;

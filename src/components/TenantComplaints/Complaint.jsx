@@ -89,11 +89,15 @@ const Complaint = () => {
 
     return (
         <div className="raise-complaint-container">
-            <button className='back-button' onClick={handleBack}>
-                <FaArrowLeft size={24}/>    
-            </button>  
 
-            <h2>Raise a complaint</h2>
+            <div className="profile-header-pro">
+                        <button className='back-button' onClick={handleBack}>
+                            <FaArrowLeft size={16}/>    
+                        </button>
+                        {/* <IoIosArrowBack className="back-arrow" onClick={handleBack} /> */}
+                        <h2>Raise a Complaint</h2>
+            </div>
+            
             <form className="complaint-form" onSubmit = {handleSubmit}>
                 <label>Title    </label>
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required/>

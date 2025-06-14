@@ -123,9 +123,14 @@ const EditPersonalInfo = () => {
 
   return (
     <div className="edit-info-container">
-      <button className='back-button' onClick={handleBack}>
-        <FaArrowLeft size={24}/>  
-      </button>  
+      <div className="profile-header-pro">
+                <button className='back-button' onClick={handleBack}>
+                    <FaArrowLeft size={16}/>    
+                </button>
+                <h2>Edit Info</h2>
+      </div>
+       
+      
       <h2>Edit Personal Information</h2>
       <form onSubmit={handleSubmit} className="edit-info-form">
         <label>Name:

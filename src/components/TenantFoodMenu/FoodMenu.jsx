@@ -19,62 +19,6 @@ const FoodMenu = () => {
         { icon: <FaHome />, label: "Profile", path: "/view-personal-info" },
     ];
 
-    // useEffect(() => {
-    //     const fetchFoodMenu = async () => {
-    //         setLoading(true);  
-    //         setError(null); 
-    //         const accessToken = localStorage.getItem('accessToken');
-    //         const tenantId = localStorage.getItem('userId');
-            
-
-    //         if (!accessToken || !tenantId) {
-    //             console.error("Authentication token or tenant ID not found.");
-    //             setError("Please log in to view the food menu.");
-    //             setLoading(false);
-                
-    //             return;
-    //         }
-
-    //         try {
-    //             const response = await fetch(`http://localhost:1234/api/Dining/owner/${tenantId}`, {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${accessToken}` // Correct header name
-    //                 }
-    //             });
-
-    //             if (!response.ok) {
-    //                 const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
-    //                 if (response.status === 401 || response.status === 403) {
-    //                     setError("Menu not found.");
-                        
-    //                 } else {
-    //                     setError(`Failed to fetch menu: ${errorData.message || response.statusText}`);
-    //                 }
-    //                 console.error("API Error:", response.status, errorData);
-    //                 setMenu({}); 
-    //                 return; 
-    //             }
-
-    //             const data = await response.json();
-    //             if (data && typeof data === 'object' && Object.keys(data).length > 0) {
-    //                 setMenu(data);
-    //             } else {
-    //                 console.warn("API returned no menu data or unexpected format.");
-    //                 setMenu({}); 
-    //             }
-
-    //         } catch (err) {
-    //             console.error("Network or parsing error fetching menu data:", err);
-    //             setError("Could not connect to the server or process menu data.");
-    //             setMenu({}); 
-    //         } finally {
-    //             setLoading(false); 
-    //         }
-    //     };
-
-    //     fetchFoodMenu();
-    // }, []); 
-
     useEffect(() => {
         const fetchFoodMenu = async () => {
             setLoading(true);
@@ -133,11 +77,16 @@ const FoodMenu = () => {
     return (
         <div className="food-menu">
             <div>
-                <button className='back-button' onClick={handleBack}>
-                    <FaArrowLeft size={24} />
-                </button>
+                <div className="profile-header-pro">
+                    <button className='back-button' onClick={handleBack}>
+                        <FaArrowLeft size={16}/>    
+                    </button>
+                    {/* <IoIosArrowBack className="back-arrow" onClick={handleBack} /> */}
+                    <h2>Menu</h2>
+                </div>
+                
 
-                <h2>Today's Food Menu</h2>
+                <h2>Today's Menu</h2>
                 {error && <p className="error-message">{error}</p>} {/* Display error message */}
 
                 {loading ? (

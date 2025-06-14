@@ -2,7 +2,7 @@ import './vendorDashboard.css';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoMdSettings } from "react-icons/io";
-import { FaBed, FaHome, FaDoorOpen,  FaBuilding } from "react-icons/fa";
+import { FaBed, FaHome, FaDoorOpen,  FaBuilding, FaBullhorn, FaComments, FaUtensils } from "react-icons/fa";
 import { IoPersonCircle } from "react-icons/io5";
 import { MdPeople } from "react-icons/md";
 import { GiTakeMyMoney } from "react-icons/gi";
@@ -11,6 +11,7 @@ import QuickActionButton from '../QuickActionButton/quickActionButton';
 import { CgLogOut } from "react-icons/cg";
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
+import { FaComment } from 'react-icons/fa6';
 
 
 const VendorDashboard = () => {
@@ -73,6 +74,18 @@ const VendorDashboard = () => {
         navigate('/add-members');
     };
 
+    const handleAnnouncements = () => {
+        navigate('/owners-announcement');
+    };
+
+    const handleComplaints = () => {
+        navigate('/owners-complaints');
+    };
+
+    const handleMenu = () => {
+        navigate('/owners-menu');
+    };
+
 
     return (
         <div className="dashboard-container">
@@ -110,7 +123,10 @@ const VendorDashboard = () => {
                     <QuickActionButton icon={<FaBed />} label="Manage Rooms" onClick={handleManageRooms} />
                     <QuickActionButton icon={<MdPeople />} label="Manage Members" onClick={handleManageMembers} />
                     <QuickActionButton icon={<GiTakeMyMoney />} label="Payments" onClick={handlePayClick} />
-
+                    <QuickActionButton icon={<FaComments/>} label="Complaints" onClick={handleComplaints} />
+                    <QuickActionButton icon={<FaBullhorn/>} label="Announcements" onClick={handleAnnouncements} />
+                    <QuickActionButton icon={<FaUtensils/>} label="Add Menu" onClick={handleMenu} />
+                    
                 </div>
             </section>
 

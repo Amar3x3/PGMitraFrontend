@@ -32,7 +32,7 @@ const OwnerComplaints = () => {
   };
 
   const handleBack = () => {
-    //navigate('/tenant-dashboard');
+    navigate('/vendor-dashboard');
   };
 
   
@@ -80,11 +80,12 @@ const OwnerComplaints = () => {
 
   return (
     <div className="owner-complaints-container">
-      <button className='back-button' onClick={handleBack}>
-            <FaArrowLeft size={24}/>    
-      </button> 
-      <h2>Complaints</h2>
-
+      <div className="profile-header-pro">
+          <button className='back-button' onClick={handleBack}>
+              <FaArrowLeft size={16}/>    
+          </button>
+          <h2>Complaints</h2>
+      </div>
       {message && (
         <div className={`notification ${messageType}`}>
           {message}

@@ -4,11 +4,26 @@
     padding: 1rem;
     font-family: sans-serif;
     height: 400px;
+
+    max-height: 570px;
+    overflow-y: auto;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.announcement {
+  max-height: 650px;
+  overflow-y: auto;
+  margin-top: 0rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 2rem;
 }
 
 label {
@@ -50,7 +65,8 @@ button:hover {
     margin: 2rem auto;
     padding: 1rem;
     font-family: 'Segoe UI', sans-serif;
-  }
+    
+}
   
   .announcements-header {
     text-align: center;

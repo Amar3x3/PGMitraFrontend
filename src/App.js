@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import logo from './logo.svg';
@@ -30,8 +30,7 @@ import { FaBed } from "react-icons/fa";
 import { IoPersonAddSharp } from "react-icons/io5";
 import PropertyManage from './components/PropertyCreation/propertyManage';
 // import RoomManager from './components/RoomsCreation/roomManage';
-
-
+import { RoleProvider } from './RoleContext/RoleContext';
 
 function App() {
 
@@ -47,6 +46,7 @@ function App() {
     toast.success("Added a member!")
   }
   return (
+    <RoleProvider>
     <div className="App">
       <header className="App-header">
         <AuthProvider>
@@ -78,32 +78,9 @@ function App() {
         <ToastContainer />
       </header>
     </div>
+    </RoleProvider>
 
-    // <Router>
-      // <div className="App">
-      //   <header className="App-header">
-      //     <Routes>
-          
-      //       <Route path='/' element={<App/>}></Route>
-      //       <Route path='/home' element={<Home/>}></Route>
-      //       <Route path='/raise-request' element={<Complaint/>}></Route>
-      //       <Route path='/announcements' element={<Announcements></Announcements>}></Route>
-      //       <Route path='/food-menu' element={<FoodMenu/>}></Route>
-      //       <Route path='/edit-personal-info' element={<EditPersonalInfo></EditPersonalInfo>}></Route>
-      //       <Route path='/view-personal-info' element={<ViewPersonalInfo/>}></Route>
-      //       <Route path='/tenant-dashboard' element={<TenantDashboard/>}></Route>
-      //       <Route path='/owners-complaints' element={<OwnerComplaints/>}></Route>
-      //       <Route path='/owners-menu' element={<OwnerDiningMenu></OwnerDiningMenu>}></Route>
-      //       <Route path='/owners-announcement' element={<OwnerAnnouncements/>}></Route>
-      //   </Routes>
-      //   </header>
-
-        //{/* <Routes>
-        //  <Route path="/raise-request" element={<Complaint/>}/>
-        //</Routes> */}
-        
-      //</div>
-    // </Router>
+    
   );
 }
 

@@ -27,7 +27,7 @@ function OwnerDiningMenu() {
     }, [selectedDate]);
 
     const handleBack = () => {
-        //navigate('/tenant-dashboard');
+        navigate('/vendor-dashboard');
     };
 
     const fetchMenu = async (date) => {
@@ -112,10 +112,13 @@ function OwnerDiningMenu() {
 
     return (
         <div className="dining-container">
-            <button className='back-button' onClick={handleBack}>
-                <FaArrowLeft size={24}/>    
-            </button> 
-            <h2>Dining Menu</h2>
+            <div className="profile-header-pro">
+                <button className='back-button' onClick={handleBack}>
+                    <FaArrowLeft size={16}/>    
+                </button>
+                <h2>Dining Menu</h2>
+            </div>
+            
             <input
                 type="date"
                 value={selectedDate}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ViewPersonalInfo.css"; 
 import { useNavigate } from "react-router-dom"; 
 import axios from "axios"; 
-import { FaEnvelope, FaHome, FaFileAlt, FaComments, FaPhone, FaVenusMars, FaUtensils, FaBriefcase, FaIdCard, FaUserShield, FaArrowLeft } from "react-icons/fa";
+import { FaEnvelope, FaHome, FaFileAlt, FaComments, FaPhone, FaVenusMars, FaUtensils, FaBriefcase, FaIdCard, FaUserShield, FaArrowLeft, FaUser } from "react-icons/fa";
 import BottomNav from "../BottomNav";
 import BottomNavBar from "../BottomNavbar/bottomNav";
 import { MdRestaurantMenu } from "react-icons/md";
@@ -18,7 +18,7 @@ const ViewPersonalInfo = () =>
         {icon:<FaHome/>, label:"Home", path:"/tenant-dashboard"},
         //{icon:<FaFileAlt/>, label:"Payments", path:"/payment-dashboard"},
         {icon:<FaComments/>, label:"Complaints", path:"/raise-request"},
-        {icon:<FaHome/>, label:"Profile", path:"/view-personal-info"},
+        {icon:<FaUser/>, label:"Profile", path:"/view-personal-info"},
         {icon:<MdRestaurantMenu/>, label:"Menu", path:"/food-menu"},
 
     ]
@@ -45,9 +45,7 @@ const ViewPersonalInfo = () =>
                 {/* <IoIosArrowBack className="back-arrow" onClick={handleBack} /> */}
                 <h2>Profile</h2>
         </div>
-        <button className='back-button' onClick={handleBack}>
-            <FaArrowLeft size={24}/>
-        </button>  
+          
         <div className="profile-header"> 
             <div className="avatar-circle">👤</div> 
             <h2>{tenant.name}</h2> 

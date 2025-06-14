@@ -1,15 +1,17 @@
 .food-menu {
-  padding: 30px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  padding-right: 30px;
+  padding-top: 126px;
   max-width: 390px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: hsl(216, 33%, 97%);
-  margin:auto;
+  margin-bottom: 0px;
 
   max-height: 570px;
   overflow-y: auto;
-
+  background-color: rgb(212, 232, 212);
   
-  margin-top: 1rem;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
 }

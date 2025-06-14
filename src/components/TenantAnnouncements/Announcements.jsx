@@ -59,10 +59,7 @@ const Announcements = () => {
                 </button>
                 {/* <IoIosArrowBack className="back-arrow" onClick={handleBack} /> */}
                 <h2>📢 Announcements</h2>
-            </div>
-            <button className='back-button' onClick={handleBack}>
-                <FaArrowLeft size={24}/>    
-            </button>  
+            </div> 
 
             <h1 className="announcements-header">📢 Announcements</h1>
             {loading ? (

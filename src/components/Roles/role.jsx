@@ -1,15 +1,20 @@
 import './role.css';
 import { useNavigate } from 'react-router-dom';
+import { useRole } from '../../RoleContext/RoleContext';
 
 const Role = () => {
 
     const navigate = useNavigate();
+    const { setSelectedRole } = useRole(); // Get the setter from context
+
 
     const handleVendorClick = () => {
+        setSelectedRole('owner');
         navigate('/vendor-register');
     };
 
     const handleTenentClick = () => {
+        setSelectedRole('tenant');
         navigate('/tenent-register');
     };
 

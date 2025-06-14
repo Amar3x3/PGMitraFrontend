@@ -52,32 +52,32 @@
     font-style: italic;
   }
 
-  .profile-header-pro {
-    display: flex;
-    align-items: center;
-    padding: 15px 40px;
-    width: 220px;
-    border-bottom: 1px solid #eee;
-    background-color: #fff;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    position: fixed;
-    top: 3rem;
-    left:3.5rem;  
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+.profile-header-pro {
+  display: flex;
+  align-items: center;
+  padding: 15px 40px;
+  width: 220px;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  position: fixed;
+  top: 3rem;
+  left:3.5rem;  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .profile-header-pro h2 {
-    flex-grow: 1;
-    text-align: center;
-    margin: 0;
-    font-size: 1.2em;
-    color: #055072;
-  }
+.profile-header-pro h2 {
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.2em;
+  color: #055072;
+}
 
-  .back-button {
-    font-size: 24px;
-    color: #055072;
-    cursor: pointer;
-    margin-right: 15px;
-  }
+.back-button {
+  font-size: 24px;
+  color: #055072;
+  cursor: pointer;
+  margin-right: 15px;
+}
