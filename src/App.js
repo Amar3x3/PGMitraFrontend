@@ -31,6 +31,8 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import PropertyManage from './components/PropertyCreation/propertyManage';
 import RoomManager from './components/RoomsCreation/roomManage';
 import { PropertyProvider } from './components/contexts/PropertyContext';
+import PropertyList from './components/PropertyCreation/propertyList';
+import RoomDetailsPage from './components/RoomDetails/roomdetails';
 
 
 import { RoleProvider } from './RoleContext/RoleContext';
@@ -72,8 +74,10 @@ function App() {
               <Route path='/owners-menu' element={<OwnerDiningMenu></OwnerDiningMenu>}></Route>
               <Route path='/owners-announcement' element={<OwnerAnnouncements/>}></Route>
               <Route path="/create-property" element={<PropertyManage />} />
-              <Route path='/create-rooms' element={<RoomManager />} />
+              <Route path='/vendor/property/:vendorId' element={<PropertyList />} />
               <Route path='/vendor/room/:propertyId' element ={<RoomManager />}/>
+              <Route path='/vendor/roomdetails/:roomId' element ={<RoomDetailsPage />}/>
+        
 
               {/* <Route path="/create-property" element={<SingleButton icon={<BsBuildingFillAdd />} label="Add Property" onClick={handleAddProperty} />}/> */}
               {/* <Route path='/create-rooms' element={<SingleButton icon={<FaBed />} label="Add Rooms" onClick={handleAddRooms}/>}/> */}

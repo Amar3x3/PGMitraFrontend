@@ -7,8 +7,9 @@ import { BsBuildingFillAdd } from "react-icons/bs";
 import useAuth from '../../hooks/useAuth';
 import vendorService from '../../services/vendorService';
 import { useProperty } from '../contexts/PropertyContext';
+import { MdArrowOutward } from "react-icons/md";
 
-const PropertyManage = () => {
+const PropertyList = () => {
 
     const { user } = useAuth();
     const { setPropertyId } = useProperty();
@@ -19,7 +20,7 @@ const PropertyManage = () => {
     const [properties, setProperties] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     const navigate = new useNavigate();
 
@@ -57,53 +58,65 @@ const PropertyManage = () => {
         }
     }, [user])
 
+
     useEffect(() => {
 
         fetchProperties();
-    }, [fetchProperties]); 
-
-    const handlePropertyAdded = useCallback(() => {
-        toast.success("Property added successfully", { autoClose: 2000 });
-        handleCloseModal();
-        fetchProperties();
     }, [fetchProperties]);
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
+
+
+    const handleNavigateToCreateproperty = () => {
+        navigate('/create-property')
     };
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
+
+
+    const handleManageRoomsClick = (propertyId) => {
+        setPropertyId(propertyId);
+        navigate(`/vendor/room/${propertyId}`);
     };
+
 
     return (
         <div className='property-container'>
             <div className="profile-header-pro">
                 <IoIosArrowBack className="back-arrow" onClick={handleBack} />
-                <h2>Your Properties</h2>
+                <h2>Your Rooms</h2>
             </div>
-
-            <PropertyModal
-                isOpen={isModalOpen}
-                onRequestClose={handleCloseModal}
-                onPropertyAdded={handlePropertyAdded}
-            />
             <div className='section-property'>
                 <section >
-                    <h2 style={{ color: '#055072' }}>Your Properties</h2>
+                    <h2 style={{ color: '#055072' }}>Select a Property</h2>
                     {isLoading ? (
                         <p>Loading properties...</p>
                     ) : error ? (
                         <p style={{ color: 'red' }}>Error: {error}</p>
                     ) : properties.length === 0 ? (
-                        <p>No properties found. Add one!</p>
+                        <div><p>No properties found. Go to Manage Properties section to add your property</p>
+
+                            <button className="single-action-button" onClick={handleNavigateToCreateproperty}>
+
+                                <div className='single-action-button-sub'>
+                                    <span className="button-icon"><MdArrowOutward /></span>
+                                    <span className="button-label">Go to manage Property</span>
+                                </div>
+
+                            </button></div>
                     ) : (
                         <ul style={{ listStyle: 'none', padding: 0 }}>
                             {properties.map((property) => (
+                                // console.log("Property ID:", property.id);
                                 <li
                                     key={property.propId}
+
                                     className='pg-address-box'
+
+                                    onClick={() => handleManageRoomsClick(property.propId)}
+                                    style={{ cursor: 'pointer', marginBottom: '10px', padding: '15px', border: '1px solid #ddd', borderRadius: '8px', transition: 'background-color 0.2s ease' }}
+                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f0f0f0'}
+                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                                 >
+                                    {/* <strong>{property.propId}</strong> */}
                                     <strong>{property.name}</strong>
                                     <p style={{ margin: '5px 0 0 0', color: '#555' }}>{property.address}</p>
                                 </li>
@@ -111,17 +124,11 @@ const PropertyManage = () => {
                         </ul>
                     )}
                 </section>
-                <button className="single-action-button" onClick={handleOpenModal}>
-                    <div className='single-action-button-sub'>
-                        <span className="button-icon"><BsBuildingFillAdd /></span>
-                        <span className="button-label">Add Property</span>
-                    </div>
 
-                </button>
             </div>
 
         </div>
     );
 };
 
-export default PropertyManage;
+export default PropertyList;

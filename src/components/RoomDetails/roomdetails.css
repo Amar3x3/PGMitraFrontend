@@ -1,0 +1,163 @@
+
+.room-details-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 600px; 
+    margin: 0 auto;
+    padding: 20px 15px; 
+    box-sizing: border-box; 
+}
+
+
+.room-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 25px; 
+    color: #2c3e50;
+}
+
+.back-icon {
+    font-size: 1.8em;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.2s ease;
+}
+
+.back-icon:hover {
+    color: #007bff;
+}
+
+.header-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 0;
+    flex-grow: 1; 
+    text-align: center; 
+}
+
+
+.room-details-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    padding: 20px;
+    margin-bottom: 30px; 
+}
+
+.section-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee; 
+}
+
+
+.room-detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    padding: 12px 0; 
+    border-bottom: 1px solid #f9f9f9; 
+}
+
+.room-detail-item:last-child {
+    border-bottom: none; 
+}
+
+.detail-left {
+    flex-basis: 60%; 
+    text-align: left;
+}
+
+.detail-right {
+    flex-basis: 40%; 
+    text-align: right;
+}
+
+.detail-label {
+    font-size: 1em;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+}
+
+.detail-sub-label {
+    font-size: 0.85em;
+    color: #888;
+    margin: 2px 0 0 0; 
+}
+
+.detail-value {
+    font-size: 1em;
+    font-weight: 500; 
+    color: #222;
+    margin: 0;
+}
+
+
+.room-detail-item .detail-value.available {
+    color: #28a745; 
+}
+.room-detail-item .detail-value.occupied {
+    color: #dc3545; 
+}
+
+
+
+
+.room-details-footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; 
+    margin-top: 90px; 
+    padding-top: 20px; 
+
+}
+
+.edit-button,
+.add-button {
+    flex: 1; 
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.edit-button {
+    background-color: #055072; 
+    color: #ffffff;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.edit-button:active {
+    transform: translateY(0);
+}
+
+.add-button {
+    background-color: #e0e0e0; 
+    color: #333;
+}
+
+.add-button:hover {
+    background-color: #d0d0d0;
+    transform: translateY(-1px);
+}
+
+.add-button:active {
+    transform: translateY(0);
+}
+

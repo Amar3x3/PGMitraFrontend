@@ -35,12 +35,17 @@ const Login = () => {
                     console.log(loggedInUser);
                     navigate('/tenant-dashboard');
                 } else {
-                    navigate('/');
+                    // navigate('/');
                 }
+            }
+            else{
+                toast.error("Login failed. Please check your cresentials",  { autoClose: 2000 });
             }
 
         } catch (err) {
             console.error("Login submission error:", err);
+            toast.error("Login failed. Please check your cresentials",  { autoClose: 2000 });
+            
 
         }
     };
@@ -57,7 +62,7 @@ const Login = () => {
                     <input
                         type="text"
                         id="username"
-                        // name="username"
+                        name="username"
                         className="login-input"
                         placeholder="username"
                         value={username}
@@ -68,7 +73,7 @@ const Login = () => {
                     <input
                         type="password"
                         id="password"
-                        // name="password"
+                        name="password"
                         className="login-input"
                         placeholder="Password"
                         value={password}

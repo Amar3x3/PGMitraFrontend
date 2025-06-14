@@ -18,6 +18,8 @@ import vendorDashboardImage from '../../assets/vendorDa.png'
 const VendorDashboard = () => {
 
     const { user, logout } = useAuth();
+
+    const vendorId = user?.id;
     const navigate = useNavigate();
 
     const navItems = [
@@ -68,7 +70,7 @@ const VendorDashboard = () => {
         navigate('/create-property')
     }
     const handleManageRooms = () => {
-        navigate('/create-rooms');
+        navigate(`/vendor/property/${vendorId}`);
     };
 
     const handleManageMembers = () => {

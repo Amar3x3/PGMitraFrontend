@@ -152,4 +152,10 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 
   }
+
+  .room-number-btntype{
+    margin: '0.7rem 0 10px 0';
+    color: '#055072';
+    text-align:center;
+  }
   
