@@ -1,9 +1,10 @@
 import './login.css';
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
+import { useRole } from '../../RoleContext/RoleContext';
 
 
 const Login = () => {
@@ -12,6 +13,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const { login, error, setError, loading } = useAuth();
     const navigate = useNavigate();
+    const { setSelectedRole } = useRole(); 
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,10 +27,13 @@ const Login = () => {
                 if (loggedInUser.role === 'OWNER') {
                     toast.success(`Welcome ${username}`);
                     console.log(loggedInUser);
+                    setSelectedRole('owner');
                     navigate('/vendor-dashboard');
                 } else if (loggedInUser.role === 'TENANT') {
                     toast.success(`Welcome ${username}`);
-                    navigate('/tenent-dashboard');
+                    setSelectedRole('tenant');
+                    console.log(loggedInUser);
+                    navigate('/tenant-dashboard');
                 } else {
                     // navigate('/');
                 }

@@ -47,12 +47,13 @@ export const AuthProvider = ({ children }) => {
         setError(null);
         try {
           const response = await api.post('/auth/login', credentials);
-          const {userId, accessToken, refreshToken } = response.data;
+          const { accessToken, refreshToken, userId } = response.data;
           
           localStorage.setItem('userId', userId);
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('refreshToken', refreshToken);
-          
+          localStorage.setItem('userId', userId);
+
           const decodedUser = decodeToken(accessToken);
 
           setUser(decodedUser);
@@ -99,6 +100,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
         localStorage.removeItem('userId');
         
       };
