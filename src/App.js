@@ -16,7 +16,10 @@ import { BsBuildingFillAdd } from "react-icons/bs";
 import { FaBed } from "react-icons/fa";
 import { IoPersonAddSharp } from "react-icons/io5";
 import PropertyManage from './components/PropertyCreation/propertyManage';
-// import RoomManager from './components/RoomsCreation/roomManage';
+import RoomManager from './components/RoomsCreation/roomManage';
+import { PropertyProvider } from './components/contexts/PropertyContext';
+
+
 
 
 
@@ -36,24 +39,29 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Splash />} />
-            <Route path="/role" element={<Role />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/vendor-register" element={<VendorRegister />} />
-            <Route path="/tenent-register" element={<TenentRegister />} />
-            <Route path="/vendor-dashboard" element={<VendorDashboard />} />
-            <Route path="/tenent-dashboard" element={<TenentDashboard/>}/>
-            <Route path="/create-property" element={<PropertyManage/>}/>
-            {/* <Route path='/create-rooms' element = {<RoomManager/>}/> */}
+        <PropertyProvider>
 
-            {/* <Route path="/create-property" element={<SingleButton icon={<BsBuildingFillAdd />} label="Add Property" onClick={handleAddProperty} />}/> */}
-            {/* <Route path='/create-rooms' element={<SingleButton icon={<FaBed />} label="Add Rooms" onClick={handleAddRooms}/>}/> */}
-            {/* <Route path='/add-members' element={<SingleButton icon={<IoPersonAddSharp />} label="Add a member" onClick={handleMembers}/>}/> */}
-          </Routes>
-        </AuthProvider>
-        <ToastContainer />
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Splash />} />
+              <Route path="/role" element={<Role />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/vendor-register" element={<VendorRegister />} />
+              <Route path="/tenent-register" element={<TenentRegister />} />
+              <Route path="/vendor-dashboard" element={<VendorDashboard />} />
+              <Route path="/tenent-dashboard" element={<TenentDashboard />} />
+              <Route path="/create-property" element={<PropertyManage />} />
+              <Route path='/create-rooms' element={<RoomManager />} />
+              <Route path='/vendor/room/:propertyId' element ={<RoomManager />}/>
+
+              {/* <Route path="/create-property" element={<SingleButton icon={<BsBuildingFillAdd />} label="Add Property" onClick={handleAddProperty} />}/> */}
+              {/* <Route path='/create-rooms' element={<SingleButton icon={<FaBed />} label="Add Rooms" onClick={handleAddRooms}/>}/> */}
+              {/* <Route path='/add-members' element={<SingleButton icon={<IoPersonAddSharp />} label="Add a member" onClick={handleMembers}/>}/> */}
+            </Routes>
+          </AuthProvider>
+          <ToastContainer />
+        </PropertyProvider>
+
       </header>
     </div>
 

@@ -54,8 +54,8 @@ const VendorRegister = () => {
                     <input type="email" placeholder="E-mail" className="vendor-register-input" id="email" name="email" value={formData.email} onChange={handleChange} />
                     <input type="password" placeholder="Password" className="vendor-register-input" id="password" name="password" value={formData.password} onChange={handleChange} />
                     <input type="tel" placeholder="Phone number" className="vendor-register-input" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
-                    <input type="text" placeholder="PG Name" className="vendor-register-input" />
-                    <input type="text" placeholder="PG Address" className="vendor-register-input" />
+                    {/* <input type="text" placeholder="PG Name" className="vendor-register-input" />
+                    <input type="text" placeholder="PG Address" className="vendor-register-input" /> */}
                     <button type="submit" className="vendor-register-button"> {loading ? 'Registering...' : 'Register'}</button>
 
                 </form>
