@@ -1,8 +1,13 @@
 import './vendorDashboard.css';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoMdSettings } from "react-icons/io";
+
+import { FaBed, FaHome, FaDoorOpen,  FaBuilding } from "react-icons/fa";
+import { FaBed, FaHome, FaDoorOpen, FaBuilding, FaBullhorn, FaComments, FaUtensils } from "react-icons/fa";
+
 import { FaBed, FaHome, FaDoorOpen,  FaBuilding, FaBullhorn, FaComments, FaUtensils } from "react-icons/fa";
+
 import { IoPersonCircle } from "react-icons/io5";
 import { MdPeople } from "react-icons/md";
 import { GiTakeMyMoney } from "react-icons/gi";
@@ -13,13 +18,16 @@ import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 import { FaComment } from 'react-icons/fa6';
 import vendorDashboardImage from '../../assets/vendorDa.png'
-
+import vendorService from '../../services/vendorService';
 
 const VendorDashboard = () => {
 
     const { user, logout } = useAuth();
 
-    const vendorId = user?.id;
+
+    // const vendorId = user?.id;
+    const vendorId = localStorage.getItem('userId');
+    const VendorAccessToken = localStorage.getItem('accessToken');
     const navigate = useNavigate();
 
     const navItems = [
@@ -29,29 +37,56 @@ const VendorDashboard = () => {
         { icon: <FaBed />, label: 'Rooms', path: '/vendor-rooms' },
     ];
 
+    const [payments, setPayments] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const recentPayments = [
-        { id: 1, name: 'Ethan Carter', room: 'Room 101', amount: '$500' },
-        { id: 2, name: 'Sophia Clark', room: 'Room 202', amount: '$500' },
-        { id: 3, name: 'Liam Harper', room: 'Room 301', amount: '$500' },
-    ];
+    
+    const fetchPayments = useCallback(async () => {
+        if (!vendorId || !VendorAccessToken) {
+            setError('User not authenticated or ID/token missing. Please log in to view properties.');
+            setIsLoading(false);
 
-    const StatCard = ({ label, value }) => (
-        <div className="stat-card">
-            <p className="stat-label">{label}</p>
-            <h3 className="stat-value">{value}</h3>
-        </div>
-    );
+            return;
+        }
 
-    const PaymentItem = ({ name, room, amount }) => (
+        setIsLoading(true);
+        setError(null);
+
+        try {
+
+            const data = await vendorService.getPaymentList(vendorId, VendorAccessToken);
+            setPayments(data);
+
+        }
+
+        catch (err) {
+            console.error("Failed to fetch payments:", err);
+            setError(err.message || 'Failed to fetch payments.');
+            toast.error(err.message || 'Failed to fetch payments');
+            setPayments([]);
+        }
+
+        finally {
+            setIsLoading(false);
+        }
+    }, [user])
+
+
+    useEffect(() => {
+
+        fetchPayments();
+    }, [fetchPayments]);
+
+    const PaymentItem = ({ name, dueDate, amount }) => (
         <div className="payment-item">
             <IoPersonCircle className="payment-avatar" />
 
             <div className="payment-details">
                 <p className="payment-name">{name}</p>
-                <p className="payment-room">{room}</p>
+                <p className="payment-room">{dueDate}</p>
             </div>
-            <span className="payment-amount">{amount}</span>
+            <span className="payment-amount">₹{amount}</span>
         </div>
     );
 
@@ -74,7 +109,7 @@ const VendorDashboard = () => {
     };
 
     const handleManageMembers = () => {
-        navigate('/add-members');
+        navigate('/create-tenant');
     };
 
     const handleAnnouncements = () => {
@@ -89,7 +124,6 @@ const VendorDashboard = () => {
         navigate('/owners-menu');
     };
 
-
     return (
         <div className="dashboard-container">
 
@@ -101,19 +135,17 @@ const VendorDashboard = () => {
 
             <section className="stats-section">
                 <img className='splash-img' src={vendorDashboardImage} alt="Dashboard" />
-                {/* <StatCard label="Occupancy" value="80%" />
-                <StatCard label="Vacant" value="20%" /> */}
             </section>
 
-
+            
             <section className="recent-payments-section">
-                <h2 className="section-title">Recent Payments</h2>
+                {payments.length > 0 ? <h2 className="section-title">Recent Payments</h2> : ''}
                 <div className="payment-list">
-                    {recentPayments.map((payment) => (
+                    {payments.map((payment) => (
                         <PaymentItem
                             key={payment.id}
-                            name={payment.name}
-                            room={payment.room}
+                            name={payment.tenantName}
+                            dueDate={payment.dueDate}
                             amount={payment.amount}
                         />
                     ))}
@@ -127,6 +159,9 @@ const VendorDashboard = () => {
                     <QuickActionButton icon={<FaBed />} label="Manage Rooms" onClick={handleManageRooms} />
                     <QuickActionButton icon={<MdPeople />} label="Manage Members" onClick={handleManageMembers} />
                     <QuickActionButton icon={<GiTakeMyMoney />} label="Payments" onClick={handlePayClick} />
+                    <QuickActionButton icon={<FaComments />} label="Complaints" onClick={handleComplaints} />
+                    <QuickActionButton icon={<FaBullhorn />} label="Announcements" onClick={handleAnnouncements} />
+                    <QuickActionButton icon={<FaUtensils />} label="Add Menu" onClick={handleMenu} />
                     <QuickActionButton icon={<FaComments/>} label="Complaints" onClick={handleComplaints} />
                     <QuickActionButton icon={<FaBullhorn/>} label="Announcements" onClick={handleAnnouncements} />
                     <QuickActionButton icon={<FaUtensils/>} label="Add Menu" onClick={handleMenu} />

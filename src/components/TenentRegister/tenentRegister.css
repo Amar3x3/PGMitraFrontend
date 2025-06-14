@@ -34,15 +34,15 @@
 }
 
 .register-input:focus {
-    border-color: #001e3d; 
+    border-color: #053d12; 
     outline: none; 
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); 
+    box-shadow: 0 0 0 3px rgba(2, 74, 21, 0.25); 
 }
 
 .register-button {
     width: 100%; 
     padding: 12px 15px;
-    background-color: #055072;
+    background-color: #135823;
     color: white;
     border: none;
     border-radius: 5px;
@@ -53,7 +53,7 @@
 }
 
 .register-button:hover {
-    background-color: #055072; 
+    background-color: #025315; 
 }
 
 .register-button:active {
@@ -106,7 +106,7 @@ select:focus {
   background: fff;
 }
 select::picker-icon {
-  color: #055072;
+  color: #053d12;
   transition: 0.4s rotate;
 }
 select:open::picker-icon {

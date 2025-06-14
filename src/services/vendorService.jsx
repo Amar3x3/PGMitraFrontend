@@ -143,6 +143,71 @@ const updateRoom = async (roomId, roomData, token) => {
 };
 
 
+const getTenants= async (vendorId, tenantData, token) => { 
+    try {
+        const response = await api.get(`/vendor/allTenants/${vendorId}`, tenantData, {
+            headers: { 
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            
+            throw new Error(error.response.data.message || 'Failed to load rooms.');
+        } else {
+            
+            throw new Error(error.message || 'Failed to load rooms.');
+        }
+    }
+};
+
+
+const createTenant = async (tenantData, token) => { 
+    try {
+        const response = await api.post('/vendor/addNewTenant', tenantData, {
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(response);
+        return response.data;   
+    } catch (error) {
+        if (error.response) {
+            
+            throw new Error(error.response.data.message || 'Failed to load rooms.');
+        } else {
+            
+            throw new Error(error.message || 'Failed to load rooms.');
+        }
+    }
+};
+
+const getPaymentList = async (vendorId, token) => {
+    try {
+        const response = await api.get(`/vendor/payments/${vendorId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        console.log(response);
+        return response.data; 
+    } catch (error) {
+        if (error.response) {
+           
+            console.error("Payment list fetching failed with response error:", error.response.data);
+            throw new Error(error.response.data.message || 'Failed to load payment list. Server error.');
+        } else if (error.request) {
+            console.error("Payment list fetching failed: No response received from server.");
+            throw new Error('Failed to load payment list. No response from server.');
+        } else {
+            console.error("Payment list fetching failed with request setup error:", error.message);
+            throw new Error(error.message || 'Failed to load payment list. An unexpected error occurred.');
+        }
+    }
+};
+
 
 export default {
     createProperty,
@@ -151,5 +216,8 @@ export default {
     createRoom,
     getRoom,
     getRoomDetailsByRoomId,
-    updateRoom
+    updateRoom,
+    getTenants,
+    createTenant,
+    getPaymentList
 };
