@@ -12,6 +12,7 @@ import { CgLogOut } from "react-icons/cg";
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 import { FaComment } from 'react-icons/fa6';
+import vendorDashboardImage from '../../assets/vendorDa.png'
 
 
 const VendorDashboard = () => {
@@ -97,8 +98,9 @@ const VendorDashboard = () => {
             </header>
 
             <section className="stats-section">
-                <StatCard label="Occupancy" value="80%" />
-                <StatCard label="Vacant" value="20%" />
+                <img className='splash-img' src={vendorDashboardImage} alt="Dashboard" />
+                {/* <StatCard label="Occupancy" value="80%" />
+                <StatCard label="Vacant" value="20%" /> */}
             </section>
 
 

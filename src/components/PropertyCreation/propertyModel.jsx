@@ -1,19 +1,72 @@
 import './propertyModel.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
+import vendorService from '../../services/vendorService';
+
+
 
 const PropertyModal = ({ isOpen, onRequestClose, onPropertyAdded }) => {
- 
-  const [propertyName, setPropertyName] = useState('');
-  const [propertyAddress, setPropertyAddress] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState('');
 
-  const handleSubmit = () => {
-    toast.info("Integration needed");
-  }
-  
+  const vendorId = localStorage.getItem('userId');
+  const vendorAccessToken = localStorage.getItem('accessToken');
+
+  const [formData, setFormData] = useState({
+    name: '',
+    address: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [id]: value
+    }));
+  };
+
+
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+    setFormError('');
+
+
+    if (!formData.name.trim() || !formData.address.trim()) {
+      setFormError('Property Name and Address are required.');
+      toast.error('Both Property Name and Address are required.');
+      return;
+    }
+
+    if (!vendorId || !vendorAccessToken) {
+      setFormError('Owner ID or authentication token missing. Cannot add property.');
+      toast.error('Authentication error. Please log in again.');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+
+      const newProperty = await vendorService.createProperty(vendorId, formData, vendorAccessToken);
+      onPropertyAdded(newProperty);
+
+      setFormData({ name: '', address: '' });
+      onRequestClose();
+
+    } catch (error) {
+      
+      setFormError(error.message || 'Failed to add property. Please try again.');
+      toast.error(error.message || 'Failed to add property.');
+      
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -27,8 +80,8 @@ const PropertyModal = ({ isOpen, onRequestClose, onPropertyAdded }) => {
           <input
             type="text"
             id="name"
-            value={propertyName}
-            onChange={(e) => setPropertyName(e.target.value)}
+            value={formData.name}
+            onChange={handleChange}
             className='form-name-in-property'
             disabled={isLoading}
           />
@@ -38,8 +91,8 @@ const PropertyModal = ({ isOpen, onRequestClose, onPropertyAdded }) => {
           <label htmlFor="address" className='form-address-label-property,'>Property Address:</label>
           <textarea
             id="address"
-            value={propertyAddress}
-            onChange={(e) => setPropertyAddress(e.target.value)}
+            value={formData.address}
+            onChange={handleChange}
             rows="4"
             className='form-address-in-property'
             disabled={isLoading}
