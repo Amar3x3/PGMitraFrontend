@@ -22,8 +22,14 @@ import PropertyList from './components/PropertyCreation/propertyList';
 import RoomDetailsPage from './components/RoomDetails/roomdetails';
 
 
+<<<<<<< Updated upstream
 
 
+=======
+import { RoleProvider } from './RoleContext/RoleContext';
+import TenantManager from './components/TenantCreation/tenantManager';
+import PaymentList from './components/PaymentsList/paymentsList';
+>>>>>>> Stashed changes
 
 function App() {
 
@@ -56,8 +62,9 @@ function App() {
               <Route path='/vendor/property/:vendorId' element={<PropertyList />} />
               <Route path='/vendor/room/:propertyId' element ={<RoomManager />}/>
               <Route path='/vendor/roomdetails/:roomId' element ={<RoomDetailsPage />}/>
-        
-
+              <Route path='/create-tenant' element={<TenantManager/>}/>
+              <Route path='/vendor-payments' element={<PaymentList/>}/>
+            
               {/* <Route path="/create-property" element={<SingleButton icon={<BsBuildingFillAdd />} label="Add Property" onClick={handleAddProperty} />}/> */}
               {/* <Route path='/create-rooms' element={<SingleButton icon={<FaBed />} label="Add Rooms" onClick={handleAddRooms}/>}/> */}
               {/* <Route path='/add-members' element={<SingleButton icon={<IoPersonAddSharp />} label="Add a member" onClick={handleMembers}/>}/> */}

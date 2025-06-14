@@ -9,10 +9,10 @@ const TenentRegister = () => {
 
     const [formData, setFormData] = useState({
         name: '',
-        userName: '',
+        username: '',
         password: '',
         confirmPassword: '',
-        phoneNumber: '',
+        phonenumber: '',
         email: '',
         gender: '',
         emergencyContactName: '',
@@ -60,11 +60,11 @@ const TenentRegister = () => {
                 <form className="register-form" onSubmit={handleSubmit} >
 
                     <input type="text" id="fullName" name="name" placeholder='Full Name' className="register-input" value={formData.name} onChange={handleChange} required />
-                    <input type="text" id="username" name="userName" placeholder='Username' className="register-input" value={formData.userName} onChange={handleChange} required />
+                    <input type="text" id="username" name="username" placeholder='Username' className="register-input" value={formData.username} onChange={handleChange} required />
                     <input type="email" id="email" name="email" placeholder='E-mail-ID' className="register-input" value={formData.email} onChange={handleChange} required />
                     <input type="password" id="password" name='password' className="register-input" placeholder='Password' value={formData.password} onChange={handleChange} required />
                     <input type="password" id="confirmPassword" name='confirmPassword' className="register-input" placeholder='Confirm Password' value={formData.confirmPassword} onChange={handleChange} required />
-                    <input type="number" id="phoneNumber" name='phoneNumber' className="register-input" placeholder='Phone Number' value={formData.phoneNumber} onChange={handleChange} required />
+                    <input type="number" id="phoneNumber" name='phonenumber' className="register-input" placeholder='Phone Number' value={formData.phonenumber} onChange={handleChange} required />
                     <input type="text" id="emName" name='emergencyContactName' className="register-input" placeholder='Emergency Contact Name' value={formData.emergencyContactName} onChange={handleChange} />
                     <input type="tel" id="emPhone" name='emergencyContactPhone' className="register-input" placeholder='Emergency Contact Number' value={formData.emergencyContactPhone} onChange={handleChange} />
                     <input type="password" id="aadhar" name='aadharNumber' className="register-input" placeholder='Aadhar' value={formData.aadharNumber} onChange={handleChange} />
