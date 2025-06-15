@@ -96,19 +96,9 @@ function TenantDashboard() { const navigate = useNavigate();
             </div> 
             <div className="profile-info"> 
                 <h3>{tenant.name}</h3> 
-                <p>{tenant.roomNo || "No Room"}</p> 
+                <p>Room:{tenant.roomNo || "No Room assigned"}</p> 
             </div> 
         </div>
-
-        {/* <div className="quick-actions">
-            <h4>Quick Actions</h4>
-            <div className="action-buttons">
-                <button onClick={() => navigate('/view-personal-info')}>View Profile</button>
-                <button onClick={() => navigate('/food-menu')}>Today's Menu</button>
-                <button onClick={() => navigate('/raise-request')}>Raise Complaint</button>
-                <button onClick={() => navigate('/announcements')}>Announcements</button>
-            </div>
-        </div> */}
 
         <section className="quick-actions-section">
             <h2 className="section-title">Quick Actions</h2>
@@ -120,21 +110,6 @@ function TenantDashboard() { const navigate = useNavigate();
 
             </div>
         </section>
-
-        {/* <div className="bottom-navi">
-            <div className="nav-item" onClick={() => navigate('/tenant-dashboard')}>
-                <FaHome />
-                <span>Home</span>
-            </div>
-            <div className="nav-item" onClick={() => navigate('/raise-request')}>
-                <FaTools />
-                <span>Complaints</span>
-            </div>
-            <div className="nav-item" onClick={() => navigate('/view-personal-info')}>
-                <FaUser />
-                <span>Profile</span>
-            </div>
-        </div> */}
 
         <BottomNavBar links={dashboardLinks}/>
     </div>

@@ -6,6 +6,7 @@ import BottomNav from '../BottomNav';
 import { MdRestaurantMenu } from 'react-icons/md';
 import BottomNavBar from '../BottomNavbar/bottomNav';
 import api from '../../services/authApi';
+import useAuth from '../../hooks/useAuth';
 
 const Announcements = () => {
     const [announcements, setAnnouncements] = useState([]);
@@ -13,6 +14,7 @@ const Announcements = () => {
     const navigate=useNavigate();
     const tenantId = localStorage.getItem('userId'); 
     const accessToken = localStorage.getItem('accessToken');
+    const { user, logout } = useAuth();
 
     const bottomNavLinks = [
         {icon:<FaHome/>, label:"Home", path:"/tenant-dashboard"},
@@ -27,7 +29,7 @@ const Announcements = () => {
         const fetchAnnouncements = async () => {
             try {
                 const tenantId = localStorage.getItem('tenantId'); 
-                const response = await api.get(`/announcement/tenant/${tenantId}`);
+                const response = await api.get(`/announcement/tenant/${user.id}`);
                 const data = response.data;
     
                 if (Array.isArray(data)) {

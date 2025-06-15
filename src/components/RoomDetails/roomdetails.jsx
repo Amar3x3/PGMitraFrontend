@@ -28,7 +28,7 @@ const RoomDetailsPage = () => {
     const { user } = useAuth();
     const VendorAccessToken = localStorage.getItem('accessToken');
 
-    const{ roomId} = useParams();
+    const{ roomId, propertyId} = useParams();
     const navigate = useNavigate();
 
     const [room, setRoom] = useState(null);
@@ -36,6 +36,7 @@ const RoomDetailsPage = () => {
     const [fetchError, setFetchError] = useState(null);
 
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
 
     const fetchRoomsDetails = useCallback(async () => {
 
@@ -131,6 +132,7 @@ const RoomDetailsPage = () => {
             </section>
 
             <RoomTenants roomId={roomId} />
+            <input type="text"/>
 
             <footer className="room-details-footer-buttons">
                 <button className="edit-button" onClick={handleEditRoom}>

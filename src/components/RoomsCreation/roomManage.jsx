@@ -80,8 +80,8 @@ const RoomManager = () => {
     setIsModalOpen(false);
   };
 
-  const handleManageRoomDetailsClick = (roomId) =>{
-    navigate(`/vendor/roomdetails/${roomId}`)
+  const handleManageRoomDetailsClick = (roomId, propertyId) =>{
+    navigate(`/vendor/roomdetails/${roomId}/${propertyId}`)
   }
 
 

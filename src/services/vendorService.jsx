@@ -208,6 +208,7 @@ const getPaymentList = async (vendorId, token) => {
     }
 };
 
+
 const sendPaymentReminder = async (tenantId, token) => {
     try {
         const response = await api.post(`/vendor/send-reminder/${tenantId}`, {
@@ -219,6 +220,21 @@ const sendPaymentReminder = async (tenantId, token) => {
     } catch (error) {
         console.error(`Error sending payment reminder to tenant ${tenantId}:`, error);
         throw error;
+
+      
+const setDueDate = async (vendorId, DueDate, token) => {
+    try {
+        const response = await api.post(`/vendor/setduedate/${vendorId}`, {dueDate:DueDate}, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type':'application/json'
+            }
+        });
+        console.log(response);
+        return response.data; 
+    } catch (error) {
+        console.error("Failed to set due date and create payments:", error.message);
+
     }
 };
 
@@ -234,5 +250,7 @@ export default {
     getTenants,
     createTenant,
     getPaymentList,
-    sendPaymentReminder
+    sendPaymentReminder,
+    setDueDate
+
 };
