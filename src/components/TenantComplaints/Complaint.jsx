@@ -4,6 +4,7 @@ import './Complaint.css';
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import api from "../../services/authApi";
+import useAuth from "../../hooks/useAuth";
 
 const Complaint = () => {
     const [title, setTitle] = useState('');

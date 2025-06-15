@@ -4,6 +4,7 @@ import './OwnersComplaints.css';
 import { FaExclamationCircle, FaCheckCircle, FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import api from '../../services/authApi';
+import useAuth from '../../hooks/useAuth';
 
 
 const OwnerComplaints = () => {
@@ -13,6 +14,8 @@ const OwnerComplaints = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // 'success' or 'error'
   const navigate=useNavigate();
+  const {user} = useAuth();
+
 
   const ownerId = localStorage.getItem('userId');
   const accessToken = localStorage.getItem('accessToken');
@@ -39,7 +42,7 @@ const OwnerComplaints = () => {
   const fetchFeedbacks = async (ownerId) => { 
     try {
         
-        const response = await api.get(`/vendor/complaints/${ownerId}`);
+        const response = await api.get(`/vendor/complaints/${user.id}`);
 
         const allFeedbacks = response.data; 
 
