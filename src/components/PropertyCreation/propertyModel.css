@@ -150,6 +150,17 @@
     padding: 15px;
     margin-bottom: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
 
   }
   
+  .del-btn-property{
+    position: relative;
+    top: 13px;
+    color: rgb(202, 27, 27);
+  } 
+
+  .property-details{
+    text-align: left;
+  }

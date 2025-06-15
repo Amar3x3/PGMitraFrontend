@@ -1,4 +1,4 @@
-import './roomModel.css'; 
+import './roomModel.css';
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import RoomModal from './roomModel';
@@ -7,6 +7,7 @@ import { FaBed } from "react-icons/fa";
 import { IoIosArrowBack } from 'react-icons/io';
 import useAuth from '../../hooks/useAuth';
 import vendorService from '../../services/vendorService';
+
 
 const RoomManager = () => {
 
@@ -80,7 +81,7 @@ const RoomManager = () => {
     setIsModalOpen(false);
   };
 
-  const handleManageRoomDetailsClick = (roomId, propertyId) =>{
+  const handleManageRoomDetailsClick = (roomId, propertyId) => {
     navigate(`/vendor/roomdetails/${roomId}/${propertyId}`)
   }
 
@@ -127,21 +128,28 @@ const RoomManager = () => {
               {rooms.map((room) => (
                 <li
                   key={room.id}
-                 
-
-                  onClick={() => 
-                    handleManageRoomDetailsClick(room.id)}
-                    style={{ cursor: 'pointer',
-                             marginBottom: '10px', 
-                             padding: '15px', 
-                             border: '1px solid #ddd', 
-                             borderRadius: '8px', 
-                             transition: 'background-color 0.2s ease', 
-                             backgroundColor: '#fff'}}
-                                    
-                >
                   
-                  <h3 className='room-number-btntype'>Room: {room.room_no}</h3>
+
+                  onClick={() =>
+                    handleManageRoomDetailsClick(room.id)}
+                  style={{
+                    cursor: 'pointer',
+                    marginBottom: '10px',
+                    padding: '15px',
+                    border: '1px solid #ddd',
+                    borderRadius: '8px',
+                    transition: 'background-color 0.2s ease',
+                    backgroundColor: '#fff'
+                  }}
+
+                >
+                 
+                    <h3 className='room-number-btntype'>Room: {room.room_no}</h3>
+                    {/* <p style={{ color: '#555' }}>Sharing : {room.capacity}</p> */}
+                  
+
+                  {/* <div className='del-btn-room' onClick={() => handleDeleteRoom(propertyId, room.id, room.name)}><FaTrash /></div> */}
+
                 </li>
               ))}
             </ul>

@@ -222,7 +222,7 @@ const sendPaymentReminder = async (tenantId, token) => {
         throw error;
 
     }}
-    
+
 const setDueDate = async (vendorId, DueDate, token) => {
     try {
         const response = await api.post(`/vendor/setduedate/${vendorId}`, {dueDate:DueDate}, {
@@ -240,6 +240,22 @@ const setDueDate = async (vendorId, DueDate, token) => {
 };
 
 
+const deleteProperty = async (propertyId, token) => {
+    try {
+        const response = await api.delete(`vendor/property/${propertyId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error(`Error deleting property ${propertyId}:`, error);
+        throw error;
+    }
+};
+
+
+
 export default {
     createProperty,
     getProperty,
@@ -252,6 +268,7 @@ export default {
     createTenant,
     getPaymentList,
     sendPaymentReminder,
-    setDueDate
+    setDueDate,
+    deleteProperty
 
 };
