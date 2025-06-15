@@ -41,6 +41,7 @@ import PaymentList from './components/PaymentsList/paymentsList';
 // import AddTenant from '../../../PGMitraFrontend/src/components/AddTenant';
 
 
+
 function App() {
 
   const handleAddProperty = () => {

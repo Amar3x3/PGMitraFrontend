@@ -25,10 +25,10 @@
   transition: transform 0.2s;
 }
 
-.tenant-card:hover {
+/* .tenant-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .tenant-info h4 {
   margin: 0 0 10px 0;
@@ -40,6 +40,8 @@
   margin: 5px 0;
   color: #666;
   font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .loading {
@@ -56,3 +58,19 @@
   border-radius: 4px;
   margin: 10px 0;
 } 
+
+.tenant-bell{
+  cursor: pointer;
+  position: relative;
+  left: 7.5rem;
+  top: 3rem;
+}
+.tenant-bell:hover{
+  /* color: #052077; */
+  color: #dc3545;
+}
+
+.tenant-details{
+  position: relative;
+  bottom: 3px;
+}
