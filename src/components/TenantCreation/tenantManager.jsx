@@ -90,7 +90,7 @@ const TenantManager = () => {
             <TenantModal
                 isOpen={isModalOpen}
                 onRequestClose={handleCloseModal}
-                onPropertyAdded={handleTenantAdded}
+                onTenantAdded={handleTenantAdded}
             />
             <div className='section-property'>
                 <section >
