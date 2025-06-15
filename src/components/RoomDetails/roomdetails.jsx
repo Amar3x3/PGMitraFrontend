@@ -132,7 +132,6 @@ const RoomDetailsPage = () => {
             </section>
 
             <RoomTenants roomId={roomId} />
-            <input type="text"/>
 
             <footer className="room-details-footer-buttons">
                 <button className="edit-button" onClick={handleEditRoom}>

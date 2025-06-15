@@ -221,7 +221,8 @@ const sendPaymentReminder = async (tenantId, token) => {
         console.error(`Error sending payment reminder to tenant ${tenantId}:`, error);
         throw error;
 
-      
+    }}
+    
 const setDueDate = async (vendorId, DueDate, token) => {
     try {
         const response = await api.post(`/vendor/setduedate/${vendorId}`, {dueDate:DueDate}, {

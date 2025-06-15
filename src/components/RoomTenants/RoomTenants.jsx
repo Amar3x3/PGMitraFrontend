@@ -27,8 +27,7 @@ const RoomTenants = ({ roomId }) => {
     }
 
     setSendingReminder(tenantId);
-    toast.info(`Sending reminder to ${tenantName}...`);
-
+    toast.info(`Sending reminder to ${tenantName}...`, { autoClose: true, toastId: `reminder-${tenantId}` });
     try {
      
       const response = await vendorService.sendPaymentReminder(tenantId, vendorAccessToken);
@@ -36,7 +35,7 @@ const RoomTenants = ({ roomId }) => {
         render: response.message || `Payment reminder sent to ${tenantName} successfully!`,
         type: 'success',
         autoClose: 3000,
-      });
+    });
       
   
     } catch (error) {
@@ -46,7 +45,8 @@ const RoomTenants = ({ roomId }) => {
         render: errorMessage,
         type: 'error',
         autoClose: 5000,
-      });
+    });
+    
     } finally {
       setSendingReminder(null);
     }
