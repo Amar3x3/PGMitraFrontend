@@ -1,0 +1,77 @@
+.container {
+    background-color: #ffffff; /* White background for the main content area */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px 40px 5px 40px;
+    width: 100%;
+    max-width: 400px; /* Adjust max-width as needed */
+    box-sizing: border-box;
+}
+
+.tenant-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-bottom: 3px solid #eee; /* Light separator line */
+}
+
+.tenant-left-details{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    right: 1.5rem;
+}
+.tenant-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.tenant-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 16px;
+    background-color: black; /* Placeholder background color */
+}
+
+.tenant-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* The image in the design appears to be flat vector/illustration style,
+       so a simple placeholder with good object-fit works.
+       You would replace these with actual avatar images. */
+}
+
+.tenant-details {
+    text-align: left;
+    flex-grow: 1; /* Allows details to take up available space */
+}
+
+.tenant-name {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 500; /* Medium weight for names */
+    color: #333; /* Darker text for names */
+    margin-bottom: 4px;
+}
+
+.tenant-room {
+    font-size: 14px;
+    color: #888; /* Lighter text for room number */
+    font-weight: 400; /* Regular weight */
+}
+
+.tenant-right-details{
+    position: relative;
+    left: 1.5rem;
+}
+.tenant-amount {
+    font-size: 16px;
+    font-weight: 600; /* Semi-bold for amount */
+    color: #333; /* Darker text for amount */
+    margin-left: 20px; /* Space between details and amount */
+    flex-shrink: 0; /* Prevent shrinking */
+}
