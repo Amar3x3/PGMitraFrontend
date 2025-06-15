@@ -208,6 +208,21 @@ const getPaymentList = async (vendorId, token) => {
     }
 };
 
+const setDueDate = async (vendorId, DueDate, token) => {
+    try {
+        const response = await api.post(`/vendor/setduedate/${vendorId}`, {dueDate:DueDate}, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type':'application/json'
+            }
+        });
+        console.log(response);
+        return response.data; 
+    } catch (error) {
+        console.error("Failed to set due date and create payments:", error.message);
+    }
+};
+
 
 export default {
     createProperty,
@@ -219,5 +234,6 @@ export default {
     updateRoom,
     getTenants,
     createTenant,
-    getPaymentList
+    getPaymentList,
+    setDueDate
 };
