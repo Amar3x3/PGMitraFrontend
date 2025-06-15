@@ -31,8 +31,8 @@ const VendorDashboard = () => {
     const navItems = [
         { icon: <FaHome />, label: 'Home', path: '/vendor-dashboard' },
         { icon: <GiTakeMyMoney />, label: 'Payments', path: '/vendor-payments' },
-        { icon: <MdPeople />, label: 'Members', path: '/vendor-members' },
-        { icon: <FaBed />, label: 'Rooms', path: '/vendor-rooms' },
+        { icon: <MdPeople />, label: 'Members', path: '/create-tenant' },
+        { icon: <FaBed />, label: 'Rooms', path: `/vendor/property/${vendorId}` },
     ];
 
     const [payments, setPayments] = useState([]);
@@ -160,10 +160,7 @@ const VendorDashboard = () => {
                     <QuickActionButton icon={<FaComments />} label="Complaints" onClick={handleComplaints} />
                     <QuickActionButton icon={<FaBullhorn />} label="Announcements" onClick={handleAnnouncements} />
                     <QuickActionButton icon={<FaUtensils />} label="Add Menu" onClick={handleMenu} />
-                    <QuickActionButton icon={<FaComments/>} label="Complaints" onClick={handleComplaints} />
-                    <QuickActionButton icon={<FaBullhorn/>} label="Announcements" onClick={handleAnnouncements} />
-                    <QuickActionButton icon={<FaUtensils/>} label="Add Menu" onClick={handleMenu} />
-                    
+                
                 </div>
             </section>
 
