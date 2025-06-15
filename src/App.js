@@ -38,7 +38,7 @@ import RoomDetailsPage from './components/RoomDetails/roomdetails';
 import { RoleProvider } from './RoleContext/RoleContext';
 import TenantManager from './components/TenantCreation/tenantManager';
 import PaymentList from './components/PaymentsList/paymentsList';
-import { RoleProvider } from './RoleContext/RoleContext';
+
 
 function App() {
 

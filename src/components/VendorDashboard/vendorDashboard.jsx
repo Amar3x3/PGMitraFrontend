@@ -3,10 +3,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoMdSettings } from "react-icons/io";
 
-import { FaBed, FaHome, FaDoorOpen,  FaBuilding } from "react-icons/fa";
 import { FaBed, FaHome, FaDoorOpen, FaBuilding, FaBullhorn, FaComments, FaUtensils } from "react-icons/fa";
 
-import { FaBed, FaHome, FaDoorOpen,  FaBuilding, FaBullhorn, FaComments, FaUtensils } from "react-icons/fa";
 
 import { IoPersonCircle } from "react-icons/io5";
 import { MdPeople } from "react-icons/md";

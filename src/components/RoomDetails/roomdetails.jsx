@@ -8,6 +8,7 @@ import useAuth from '../../hooks/useAuth';
 import vendorService from '../../services/vendorService';
 import { toast } from 'react-toastify';
 import EditRoomModal from './roomDetailsModel';
+import RoomTenants from '../RoomTenants/RoomTenants';
 
 
 const RoomDetailItem = ({ label, value, subLabel }) => (
@@ -129,6 +130,7 @@ const RoomDetailsPage = () => {
                 </div>
             </section>
 
+            <RoomTenants roomId={roomId} />
 
             <footer className="room-details-footer-buttons">
                 <button className="edit-button" onClick={handleEditRoom}>

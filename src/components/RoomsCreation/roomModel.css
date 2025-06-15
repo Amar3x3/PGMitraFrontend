@@ -55,6 +55,7 @@
 .section-property{
     position: relative;
     bottom: 40px;
+    margin-top: 5em;
 }
 
 .profile-header-pro {
@@ -67,12 +68,7 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
   
-
-    position: fixed;
-    top: 3rem;
-    /* width: 13%; */
-    left:3.5rem; 
-    /* z-index: 1; */
+    margin: 0  39%;
  
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }

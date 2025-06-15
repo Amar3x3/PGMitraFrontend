@@ -41,8 +41,9 @@ const TenantManager = () => {
 
         try {
 
-            const data = await vendorService.getTenants(vendorId, VendorAccessToken);
-            setTenants(data);
+            const response = await vendorService.getTenants(vendorId, VendorAccessToken);
+            setTenants(response);
+            console.log(response);
 
         }
 
@@ -107,7 +108,8 @@ const TenantManager = () => {
                                     key={tenant.id}
                                     className='pg-address-box'
                                 >
-                                    <strong>{tenant.room_id}</strong>
+                                    <strong>{tenant.name}</strong>
+                                    <p>Phone : {tenant.phone}</p>
                                     <p style={{ margin: '5px 0 0 0', color: '#555' }}>{tenant.property_id}</p>
                                 </li>
                             ))}
