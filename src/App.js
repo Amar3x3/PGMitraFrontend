@@ -38,7 +38,6 @@ import RoomDetailsPage from './components/RoomDetails/roomdetails';
 import { RoleProvider } from './RoleContext/RoleContext';
 import TenantManager from './components/TenantCreation/tenantManager';
 import PaymentList from './components/PaymentsList/paymentsList';
-// import AddTenant from '../../../PGMitraFrontend/src/components/AddTenant';
 
 
 
@@ -84,7 +83,7 @@ function App() {
               <Route path='/vendor/roomdetails/:roomId/:propertyId' element ={<RoomDetailsPage />}/>
               <Route path='/create-tenant' element={<TenantManager/>}/>
               <Route path='/vendor-payments' element={<PaymentList/>}/>
-              {/* <Route path='/add-tenant/:propertyId/:roomId' element={<AddTenant/>}/> */}
+              
             
               {/* <Route path="/create-property" element={<SingleButton icon={<BsBuildingFillAdd />} label="Add Property" onClick={handleAddProperty} />}/> */}
               {/* <Route path='/create-rooms' element={<SingleButton icon={<FaBed />} label="Add Rooms" onClick={handleAddRooms}/>}/> */}

@@ -7,6 +7,7 @@ import { BsBuildingFillAdd } from "react-icons/bs";
 import useAuth from '../../hooks/useAuth';
 import vendorService from '../../services/vendorService';
 import { useProperty } from '../contexts/PropertyContext';
+import { FaTrash } from "react-icons/fa6";
 
 const PropertyManage = () => {
 
@@ -20,6 +21,7 @@ const PropertyManage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [deletingProperty, setDeletingProperty] = useState(null);
 
     const navigate = new useNavigate();
 
@@ -60,7 +62,7 @@ const PropertyManage = () => {
     useEffect(() => {
 
         fetchProperties();
-    }, [fetchProperties]); 
+    }, [fetchProperties]);
 
     const handlePropertyAdded = useCallback(() => {
         toast.success("Property added successfully", { autoClose: 2000 });
@@ -75,6 +77,51 @@ const PropertyManage = () => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
+
+    const handleDeleteProperty = async (propertyId, propertyName) => {
+
+        console.log(propertyId);
+
+        if (!VendorAccessToken) {
+            toast.error('Authentication token missing. Please log in again.');
+            return;
+        }
+
+
+        if (deletingProperty === propertyId) {
+            toast.info("Deletion already in progress...", { autoClose: 1500 });
+            return;
+        }
+
+        setDeletingProperty(propertyId); 
+        toast.info(`Deleting property "${propertyName}"...`, { autoClose: false, toastId: `delete-${propertyId}` });
+
+        try {
+            
+            const response =  await vendorService.deleteProperty(propertyId, VendorAccessToken);
+
+            toast.update(`delete-${propertyId}`, {
+                render: response.message || `Property "${propertyName}" deleted successfully!`,
+                type: 'success',
+                autoClose: 3000,
+            });
+
+           
+            setProperties(prevProperties => prevProperties.filter(p => p.propId !== propertyId));
+            
+
+        } catch (error) {
+            console.error(`Failed to delete property ${propertyId}:`, error);
+            const errorMessage = error.response?.data?.message || `Failed to delete property "${propertyName}".`;
+            toast.update(`delete-${propertyId}`, {
+                render: errorMessage,
+                type: 'error',
+                autoClose: 5000,
+            });
+        } finally {
+            setDeletingProperty(null); 
+        }
+    }
 
     return (
         <div className='property-container'>
@@ -100,12 +147,14 @@ const PropertyManage = () => {
                     ) : (
                         <ul style={{ listStyle: 'none', padding: 0 }}>
                             {properties.map((property) => (
-                                <li
-                                    key={property.propId}
-                                    className='pg-address-box'
-                                >
-                                    <strong>{property.name}</strong>
-                                    <p style={{ margin: '5px 0 0 0', color: '#555' }}>{property.address}</p>
+                                <li key={property.propId} className='pg-address-box' >
+                                    <div className='property-details'>
+                                        <strong>{property.name}</strong>
+                                        <p style={{ margin: '5px 0 0 0', color: '#555' }}>{property.address}</p>
+                                    </div>
+
+                                    <div className='del-btn-property' onClick={() => handleDeleteProperty(property.propId, property.name)}><FaTrash /></div>
+
                                 </li>
                             ))}
                         </ul>

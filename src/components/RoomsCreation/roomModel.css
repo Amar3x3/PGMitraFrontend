@@ -150,8 +150,20 @@
   }
 
   .room-number-btntype{
-    margin: '0.7rem 0 10px 0';
+    position: relative;
+    top: 9px;
     color: '#055072';
     text-align:center;
+  }
+
+  .del-btn-room{
+    position: relative;
+    left: 6rem;
+    color: rgb(202, 27, 27);
+    transform: scale(0.8);
+  } 
+
+  .property-details{
+    text-align: left;
   }
   
