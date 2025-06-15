@@ -33,7 +33,7 @@ const FoodMenu = () => {
             }
     
             try {
-                const response = await api.get(`/Dining/owner/${tenantId}`);
+                const response = await api.get(`/Dining/tenant/${tenantId}`);
     
                 const data = response.data;
                 if (data && typeof data === 'object' && Object.keys(data).length > 0) {

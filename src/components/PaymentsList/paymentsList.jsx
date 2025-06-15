@@ -13,6 +13,8 @@ const PaymentList = () => {
 
     const { user } = useAuth();
     // const { setPropertyId } = useProperty();
+    const[showModal, setShowModal] = useState(false);
+    const[selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
     const vendorId = localStorage.getItem('userId');
     const VendorAccessToken = localStorage.getItem('accessToken');
@@ -23,6 +25,24 @@ const PaymentList = () => {
 
 
     const navigate = new useNavigate();
+
+    const handleSubmit = async () => {
+        if (!selectedDate) return;
+
+        try {
+            const response = await vendorService.setDueDate(vendorId, selectedDate, VendorAccessToken);
+            if (response.ok) {
+                console.log("Due date set successfully.");
+                toast.success("Due date set successfully.");
+            } else {
+                console.log("Due date couldn't be set.");
+                toast.success("Failed to set due date.");
+            }
+        } catch(error) {
+            console.log('Error:',error);
+        }
+        setShowModal(false);
+    };
 
     const handleBack = () => {
         navigate(-1);
@@ -106,6 +126,22 @@ const PaymentList = () => {
                 </section>
 
             </div>
+            <button className='set-due-date-btn' onClick={() => setShowModal(true)}>Set Due Date</button>
+
+            {showModal && (
+                <div className='modal-overlay'>
+                    <div className='modal-content'>
+                        <h3>Select due date</h3>
+                        <input type='date' value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} required/>
+                        <div className='modal-actions'>
+                            <button onClick={handleSubmit}>Submit</button>
+                            <button onClick={() => setShowModal(false)}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )
+
+            }
 
         </div>
     );
