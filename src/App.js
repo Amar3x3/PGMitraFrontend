@@ -40,6 +40,7 @@ import TenantManager from './components/TenantCreation/tenantManager';
 import PaymentList from './components/PaymentsList/paymentsList';
 
 
+
 function App() {
 
   const handleAddProperty = () => {
