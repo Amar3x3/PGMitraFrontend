@@ -164,7 +164,7 @@ Password: admin123
 
 👥 User Roles (Admin, Manager)
 
-🔔 Notification System (due payments, alerts)
+🔔 Notification System (due payments, alerts) : using in emial notifications to tenants registered email id .
 
 🧠 Smart Filtering, Search & Sort
 
@@ -174,7 +174,5 @@ Password: admin123
 Contributions are welcome! 💡
 Please fork the repo, create a branch, and submit a pull request with improvements or new features.
 
-📄 License
-This project is licensed under the MIT License — see the LICENSE file for details.
 
 
