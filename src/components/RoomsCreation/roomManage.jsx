@@ -131,7 +131,7 @@ const RoomManager = () => {
                   
 
                   onClick={() =>
-                    handleManageRoomDetailsClick(room.id)}
+                    handleManageRoomDetailsClick(room.id, propertyId)}
                   style={{
                     cursor: 'pointer',
                     marginBottom: '10px',

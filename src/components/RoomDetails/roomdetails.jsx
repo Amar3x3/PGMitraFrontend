@@ -2,6 +2,7 @@ import './roomdetails.css';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoIosArrowBack } from 'react-icons/io'; 
+import { MdPersonAddAlt1 } from "react-icons/md";
 import BottomNavBar from '../BottomNavbar/bottomNav';
 import { useState, useCallback, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
@@ -9,6 +10,7 @@ import vendorService from '../../services/vendorService';
 import { toast } from 'react-toastify';
 import EditRoomModal from './roomDetailsModel';
 import RoomTenants from '../RoomTenants/RoomTenants';
+import TenantModal from '../TenantCreation/tenantModel';
 
 
 const RoomDetailItem = ({ label, value, subLabel }) => (
@@ -36,6 +38,7 @@ const RoomDetailsPage = () => {
     const [fetchError, setFetchError] = useState(null);
 
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isAddTenantModalOpen, setIsAddTenantModalOpen] = useState(false);
 
 
     const fetchRoomsDetails = useCallback(async () => {
@@ -94,6 +97,21 @@ const RoomDetailsPage = () => {
         handleCloseEditModal(); 
     };
 
+    const handleAddTenant = () => {
+        setIsAddTenantModalOpen(true);
+    };
+
+    const handleCloseAddTenantModal = () => {
+        setIsAddTenantModalOpen(false);
+    };
+
+    const handleTenantAdded = useCallback(() => {
+        toast.success("Tenant added successfully!", { autoClose: 2000 });
+        handleCloseAddTenantModal();
+        // Refresh room details to update occupied count
+        fetchRoomsDetails();
+    }, [fetchRoomsDetails]);
+
 
     if (!room) {
         return (
@@ -137,6 +155,13 @@ const RoomDetailsPage = () => {
                 <button className="edit-button" onClick={handleEditRoom}>
                     Edit Room Details
                 </button>
+                {room.capacity > room.occupied && (
+                    <button className="add-tenant-button" onClick={handleAddTenant}>
+                        <div className='button-content'>
+                            <span className="button-icon"><MdPersonAddAlt1 /></span>
+                        </div>
+                    </button>
+                )}
             </footer>
 
             <EditRoomModal
@@ -144,6 +169,14 @@ const RoomDetailsPage = () => {
                 onRequestClose={handleCloseEditModal}
                 onRoomUpdated={handleRoomUpdated}
                 roomToEdit={room} 
+            />
+
+            <TenantModal
+                isOpen={isAddTenantModalOpen}
+                onRequestClose={handleCloseAddTenantModal}
+                onTenantAdded={handleTenantAdded}
+                roomId={roomId}
+                propertyId={propertyId}
             />
 
             {/* <BottomNavBar /> */}

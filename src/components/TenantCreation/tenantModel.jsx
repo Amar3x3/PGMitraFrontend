@@ -3,25 +3,28 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import vendorService from '../../services/vendorService';
+import { useParams } from 'react-router-dom';
 
-
-
-
-const TenantModal = ({ isOpen, onRequestClose, onTenantAdded }) => {
-
+const TenantModal = ({ isOpen, onRequestClose, onTenantAdded , roomId, propertyId }) => {
+    // const { roomId, propertyId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [formError, setFormError] = useState('');
-
-
-
-    const vendorId = localStorage.getItem('userId');
     const vendorAccessToken = localStorage.getItem('accessToken');
 
     const [formData, setFormData] = useState({
-        room_id: '',
-        property_id: '',
+        room_id: roomId,
+        property_id: propertyId,
         tenant_id: ''
     });
+
+    // Update formData when roomId or propertyId changes
+    useEffect(() => {
+        setFormData(prevData => ({
+            ...prevData,
+            room_id: roomId,
+            property_id: propertyId
+        }));
+    }, [roomId, propertyId]);
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -31,30 +34,24 @@ const TenantModal = ({ isOpen, onRequestClose, onTenantAdded }) => {
         }));
     };
 
-
-
     const handleSubmit = async (e) => {
-
         e.preventDefault();
         setFormError('');
 
-
-        if (!formData.room_id || !formData.property_id || !formData.tenant_id) {
-            setFormError('All fields are required.');
-            toast.error('All fields are required.');
+        if (!formData.tenant_id) {
+            setFormError('Tenant ID is required.');
+            toast.error('Tenant ID is required.');
             return;
         }
 
-        if (isNaN(formData.room_id) || parseInt(formData.room_id) <= 0 ||
-            isNaN(formData.property_id) || parseInt(formData.property_id) <= 0 ||
-            isNaN(formData.tenant_id) || parseInt(formData.tenant_id) <= 0) {
-            setFormError('All IDs must be positive numbers.');
-            toast.error('All IDs must be positive numbers.');
+        if (isNaN(formData.tenant_id) || parseInt(formData.tenant_id) <= 0) {
+            setFormError('Tenant ID must be a positive number.');
+            toast.error('Tenant ID must be a positive number.');
             return;
         }
 
         if (!vendorAccessToken) {
-            setFormError('Owner ID or authentication token missing. Cannot add property.');
+            setFormError('Authentication token missing. Please log in again.');
             toast.error('Authentication error. Please log in again.');
             return;
         }
@@ -68,19 +65,14 @@ const TenantModal = ({ isOpen, onRequestClose, onTenantAdded }) => {
         };
 
         try {
-
             const newTenant = await vendorService.createTenant(payload, vendorAccessToken);
             onTenantAdded(newTenant);
-
-            setFormData({ room_id: '', property_id: '', tenant_id: '' });
+            setFormData(prevData => ({ ...prevData, tenant_id: '' }));
             onRequestClose();
             toast.success("Tenant added successfully!");
-
         } catch (error) {
-
             setFormError(error.message || 'Failed to add tenant. Please try again.');
             toast.error(error.message || 'Failed to add tenant.');
-
         } finally {
             setIsLoading(false);
         }
@@ -95,32 +87,7 @@ const TenantModal = ({ isOpen, onRequestClose, onTenantAdded }) => {
             <h2>Add Tenant</h2>
             <form onSubmit={handleSubmit} className='form-add-property'>
                 <div>
-                    <label htmlFor="room_id" className='form-name-label-property' >Room ID: </label>
-                    <input
-                        type="number"
-                        id="room_id"
-                        value={formData.room_id}
-                        onChange={handleChange}
-                        className='form-name-in-property'
-                        disabled={isLoading}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="property_id" className='form-name-label-property,'>Property ID:</label>
-                    <input
-                        type="number"
-                        id="property_id"
-                        value={formData.property_id}
-                        onChange={handleChange}
-                        className='form-address-in-property'
-                        disabled={isLoading}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="tenant_id" className='form-name-label-property,'>Tenant ID:</label>
+                    <label htmlFor="tenant_id" className='form-name-label-property'>Tenant ID:</label>
                     <input
                         type="number"
                         id="tenant_id"
@@ -129,6 +96,7 @@ const TenantModal = ({ isOpen, onRequestClose, onTenantAdded }) => {
                         className='form-address-in-property'
                         disabled={isLoading}
                         required
+                        placeholder="Enter tenant ID"
                     />
                 </div>
                 {formError && <p className='property-form-error'>{formError}</p>}
@@ -138,7 +106,7 @@ const TenantModal = ({ isOpen, onRequestClose, onTenantAdded }) => {
                         className='btn1-add'
                         disabled={isLoading}
                     >
-                        {isLoading ? 'Adding...' : 'Add Property'}
+                        {isLoading ? 'Adding...' : 'Add Tenant'}
                     </button>
                     <button
                         type="button"
@@ -151,7 +119,7 @@ const TenantModal = ({ isOpen, onRequestClose, onTenantAdded }) => {
                 </div>
             </form>
         </Modal>
-    )
+    );
 };
 
 export default TenantModal;
