@@ -254,7 +254,39 @@ const deleteProperty = async (propertyId, token) => {
     }
 };
 
+const searchTenantsByState = async (ownerId, state, token) => {
+    try {
+        const response = await api.get(`/vendor/search/state/${ownerId}?state=${state}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            throw new Error(error.response.data.message || 'Failed to search tenants.');
+        } else {
+            throw new Error(error.message || 'Failed to search tenants.');
+        }
+    }
+};
 
+const searchTenantsByCompany = async (ownerId, company, token) => {
+    try {
+        const response = await api.get(`/vendor/search/company/${ownerId}?company=${company}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            throw new Error(error.response.data.message || 'Failed to search tenants.');
+        } else {
+            throw new Error(error.message || 'Failed to search tenants.');
+        }
+    }
+};
 
 export default {
     createProperty,
@@ -269,6 +301,7 @@ export default {
     getPaymentList,
     sendPaymentReminder,
     setDueDate,
-    deleteProperty
-
+    deleteProperty,
+    searchTenantsByState,
+    searchTenantsByCompany
 };

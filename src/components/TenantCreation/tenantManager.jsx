@@ -1,38 +1,31 @@
 import './tenantManager.css';
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import vendorService from '../../services/vendorService';
 import { IoIosArrowBack } from 'react-icons/io';
 import { MdPersonAddAlt1 } from "react-icons/md";
+import { FaSearch } from "react-icons/fa";
 import TenantModal from './tenantModel';
 
-
-
 const TenantManager = () => {
-
     const { user } = useAuth();
-
     const vendorId = localStorage.getItem('userId');
     const VendorAccessToken = localStorage.getItem('accessToken');
+    const navigate = useNavigate();
 
     const [tenants, setTenants] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const navigate = new useNavigate();
-
-    const handleBack = () => {
-        navigate(-1);
-    }
+    const [searchType, setSearchType] = useState('all'); // 'all', 'state', 'company'
+    const [searchQuery, setSearchQuery] = useState('');
 
     const fetchTenants = useCallback(async () => {
         if (!vendorId || !VendorAccessToken) {
             setError('User not authenticated or ID/token missing. Please log in to view properties.');
             setIsLoading(false);
-
             return;
         }
 
@@ -40,29 +33,43 @@ const TenantManager = () => {
         setError(null);
 
         try {
-
-            const response = await vendorService.getTenants(vendorId, VendorAccessToken);
+            let response;
+            if (searchType === 'state' && searchQuery) {
+                response = await vendorService.searchTenantsByState(vendorId, searchQuery, VendorAccessToken);
+            } else if (searchType === 'company' && searchQuery) {
+                response = await vendorService.searchTenantsByCompany(vendorId, searchQuery, VendorAccessToken);
+            } else {
+                response = await vendorService.getTenants(vendorId, VendorAccessToken);
+            }
             setTenants(response);
             console.log(response);
-
-        }
-
-        catch (err) {
+        } catch (err) {
             console.error("Failed to fetch tenants:", err);
             setError(err.message || 'Failed to fetch tenants.');
             toast.error(err.message || 'Failed to fetch tenants.');
             setTenants([]);
-        }
-
-        finally {
+        } finally {
             setIsLoading(false);
         }
-    }, [user])
+    }, [vendorId, VendorAccessToken, searchType, searchQuery]);
 
     useEffect(() => {
-
         fetchTenants();
     }, [fetchTenants]);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        fetchTenants();
+    };
+
+    const handleSearchTypeChange = (type) => {
+        setSearchType(type);
+        setSearchQuery('');
+        if (type === 'all') {
+            fetchTenants();
+        }
+    };
+
 
     const handleTenantAdded = useCallback(() => {
         toast.success("Tenant added successfully", { autoClose: 2000 });
@@ -78,7 +85,13 @@ const TenantManager = () => {
         setIsModalOpen(false);
     };
 
+    const handleBack = () => {
+        navigate(-1);
+    };
 
+    const handleNaviagteToRoomDetails = (roomId, propertyId) => {
+        navigate(`/vendor/roomdetails/${roomId}/${propertyId}`);
+    };
 
     return (
         <div className='property-container'>
@@ -87,13 +100,52 @@ const TenantManager = () => {
                 <h2>Your Tenants</h2>
             </div>
 
+            <div className="search-section">
+                <div className="search-type-buttons">
+                    <button 
+                        className={`search-type-btn ${searchType === 'all' ? 'active' : ''}`}
+                        onClick={() => handleSearchTypeChange('all')}
+                    >
+                        All Tenants
+                    </button>
+                    <button 
+                        className={`search-type-btn ${searchType === 'state' ? 'active' : ''}`}
+                        onClick={() => handleSearchTypeChange('state')}
+                    >
+                        Search by State
+                    </button>
+                    <button 
+                        className={`search-type-btn ${searchType === 'company' ? 'active' : ''}`}
+                        onClick={() => handleSearchTypeChange('company')}
+                    >
+                        Search by Company
+                    </button>
+                </div>
+
+                {(searchType === 'state' || searchType === 'company') && (
+                    <form onSubmit={handleSearch} className="search-form">
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder={searchType === 'state' ? 'Enter state name...' : 'Enter company name...'}
+                            className="search-input"
+                        />
+                        <button type="submit" className="search-button">
+                            <FaSearch />
+                        </button>
+                    </form>
+                )}
+            </div>
+
             <TenantModal
                 isOpen={isModalOpen}
                 onRequestClose={handleCloseModal}
                 onTenantAdded={handleTenantAdded}
             />
+
             <div className='section-property'>
-                <section >
+                <section>
                     <h2 style={{ color: '#055072' }}>Your Tenants</h2>
                     {isLoading ? (
                         <p>Loading tenants...</p>
@@ -102,30 +154,28 @@ const TenantManager = () => {
                     ) : tenants.length === 0 ? (
                         <p>No tenants found. Add one!</p>
                     ) : (
-                        <ul style={{ listStyle: 'none', padding: 0 }}>
+                        <ul style={{ listStyle: 'none', padding: 0 }} >
                             {tenants.map((tenant) => (
                                 <li
                                     key={tenant.id}
                                     className='pg-address-box'
+                                    
                                 >
                                     <strong>{tenant.name}</strong>
-                                    <p>Phone : {tenant.phone}</p>
-                                    <p style={{ margin: '5px 0 0 0', color: '#555' }}>{tenant.property_id}</p>
+                                    <p>Phone: {tenant.phone}</p>
+                                    <p>Company: {tenant.companyName || 'Not specified'}</p>
+                                    <p>Home Address: {tenant.homeAddress || 'Not specified'}</p>
+                                    <button onClick={() => handleNaviagteToRoomDetails(tenant.room_id, tenant.property_id)}>View Room Details</button>
                                 </li>
+                                
                             ))}
                         </ul>
                     )}
                 </section>
-                <button className="single-action-button" onClick={handleOpenModal}>
-                    <div className='single-action-button-sub'>
-                        <span className="button-icon"><MdPersonAddAlt1 /></span>
-                        <span className="button-label">Add a Tenant</span>
-                    </div>
-
-                </button>
+               
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default TenantManager;

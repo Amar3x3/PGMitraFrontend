@@ -6,7 +6,6 @@ import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 const TenentRegister = () => {
-
     const [formData, setFormData] = useState({
         name: '',
         username: '',
@@ -19,6 +18,8 @@ const TenentRegister = () => {
         emergencyContactPhone: '',
         aadharNumber: '',
         occupation: '',
+        home_address: '',
+        company_name: ''
     });
 
     const [loading, setLoading] = useState(false);
@@ -32,7 +33,6 @@ const TenentRegister = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-
         if (formData.password !== formData.confirmPassword) {
             setError("Passwords do not match.");
             return;
@@ -44,7 +44,6 @@ const TenentRegister = () => {
             await registerTenant(formData);
             toast.success('Registration successful! Please login.');
             navigate('/login');
-
         } catch (err) {
             console.error("Tenant registration failed:", err);
         } finally {
@@ -54,55 +53,183 @@ const TenentRegister = () => {
 
     return (
         <div className="register-container">
-            <div className="register-content">
-                <h1 className="register-title">Create an Account</h1>
-                <p className='register-subtitle'>Fill in the details to get started</p>
-                <form className="register-form" onSubmit={handleSubmit} >
+            <div className="register-form-container">
+                <h2>Tenant Registration</h2>
+                <form onSubmit={handleSubmit} className="register-form">
+                    <div className="form-group">
+                        <label htmlFor="name">Full Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
 
-                    <input type="text" id="fullName" name="name" placeholder='Full Name' className="register-input" value={formData.name} onChange={handleChange} required />
-                    <input type="text" id="username" name="username" placeholder='Username' className="register-input" value={formData.username} onChange={handleChange} required />
-                    <input type="email" id="email" name="email" placeholder='E-mail-ID' className="register-input" value={formData.email} onChange={handleChange} required />
-                    <input type="password" id="password" name='password' className="register-input" placeholder='Password' value={formData.password} onChange={handleChange} required />
-                    <input type="password" id="confirmPassword" name='confirmPassword' className="register-input" placeholder='Confirm Password' value={formData.confirmPassword} onChange={handleChange} required />
-                    <input type="number" id="phoneNumber" name='phonenumber' className="register-input" placeholder='Phone Number' value={formData.phonenumber} onChange={handleChange} required />
-                    <input type="text" id="emName" name='emergencyContactName' className="register-input" placeholder='Emergency Contact Name' value={formData.emergencyContactName} onChange={handleChange} />
-                    <input type="tel" id="emPhone" name='emergencyContactPhone' className="register-input" placeholder='Emergency Contact Number' value={formData.emergencyContactPhone} onChange={handleChange} />
-                    <input type="password" id="aadhar" name='aadharNumber' className="register-input" placeholder='Aadhar' value={formData.aadharNumber} onChange={handleChange} />
+                    <div className="form-group">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
 
-                    <div className={`input-group radio-group `}>
-                        <select id="gender-select" name="gender" value={formData.gender} onChange={handleChange}>
-                            <option value="" >Gender</option>
-                            <option className="option-label" value="male">
-                                Male
-                            </option>
-                            <option className="option-label" value="female">
-                                Female
-                            </option>
-                            <option className="option-label" value="other">
-                                Other
-                            </option>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="phonenumber">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="phonenumber"
+                            name="phonenumber"
+                            value={formData.phonenumber}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="gender">Gender</label>
+                        <select
+                            id="gender"
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
-                    <div className={`input-group select-group`}>
-                        <select id="occupation-select" name="occupation" value={formData.occupation} onChange={handleChange}>
-                            <option value="" >Occupation</option>
-                            <option className="option-label" value="Student">
-                                Student
-                            </option>
-                            <option className="option-label" value="Working Professional">
-                                Working Professional
-                            </option>
-                            <option className="option-label" value="Self-Employed">
-                                Self-Employed
-                            </option>
-                        </select>
+
+                    <div className="form-group">
+                        <label htmlFor="aadharNumber">Aadhar Number</label>
+                        <input
+                            type="text"
+                            id="aadharNumber"
+                            name="aadharNumber"
+                            value={formData.aadharNumber}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
-                    <button type="submit" className="register-button">{loading ? 'Registering...' : 'Register'}</button>
+
+                    <div className="form-group">
+                        <label htmlFor="occupation">Occupation</label>
+                        <input
+                            type="text"
+                            id="occupation"
+                            name="occupation"
+                            value={formData.occupation}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="company_name">Company Name</label>
+                        <input
+                            type="text"
+                            id="company_name"
+                            name="company_name"
+                            value={formData.company_name}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="home_address">Home Address</label>
+                        <textarea
+                            id="home_address"
+                            name="home_address"
+                            value={formData.home_address}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your complete address including state"
+                            rows="3"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="emergencyContactName">Emergency Contact Name</label>
+                        <input
+                            type="text"
+                            id="emergencyContactName"
+                            name="emergencyContactName"
+                            value={formData.emergencyContactName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="emergencyContactPhone">Emergency Contact Phone</label>
+                        <input
+                            type="tel"
+                            id="emergencyContactPhone"
+                            name="emergencyContactPhone"
+                            value={formData.emergencyContactPhone}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    {error && <div className="error-message">{error}</div>}
+
+                    <button type="submit" className="register-button" disabled={loading}>
+                        {loading ? 'Registering...' : 'Register'}
+                    </button>
+
+                    <p className="login-link">
+                        Already have an account? <Link to="/login">Login here</Link>
+                    </p>
                 </form>
-                <p className="register-footer">Already have an account? <Link to={"/login"}>Login here</Link></p>
             </div>
         </div>
     );
-}
+};
 
 export default TenentRegister;
