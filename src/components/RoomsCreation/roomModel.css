@@ -61,34 +61,37 @@
 .profile-header-pro {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 15px 40px;
     width: 220px;
     border-bottom: 1px solid #eee;
     background-color: #fff;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-  
-    margin: 0  39%;
- 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .back-arrow {
+    margin: 0 auto;
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 12px 14px rgba(0, 0, 0, 0.1);
+}
+
+.back-arrow {
     font-size: 24px;
     color: #055072;
     cursor: pointer;
     margin-right: 15px;
-  }
-  
-  .profile-header-pro h2 {
+}
+
+.profile-header-pro h2 {
     flex-grow: 1;
     text-align: center;
     margin: 0;
     font-size: 1.2em;
     color: #055072;
-  }
+}
 
-  .single-action-button {
+.single-action-button {
     display: flex;
     flex-direction: row;
     gap: 2rem;
@@ -108,62 +111,64 @@
     position: relative;
     left: 4px;
     top: 30px;
-  
-  }
-  
-  
-  .button-label {
+}
+
+.button-label {
     transform: scale(1.3);
     margin-bottom: 5rem;
     position: relative;
     bottom: 12px;
     margin-left: 20px;
-  }
-  
-  .single-action-button:hover {
+}
+
+.single-action-button:hover {
     background-color: #055072;
     transform: translateY(-2px);
-    
-  }
-  
-  .single-action-button:active {
+}
+
+.single-action-button:active {
     background-color: #004085;
     transform: translateY(0);
+}
 
-  }
-  
-  .button-icon {
+.button-icon {
     font-size: 2em;
     margin-bottom: 8px;
+}
 
-  }
-  
-  .pg-address-box{
-
+.pg-address-box{
     background-color: #ffffff;
     border: 1px solid #ededed;
     border-radius: 10px;
     padding: 15px;
     margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 0px 15px rgba(0,0,0,0.5);
+    border: 1px solid #055072;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.pg-address-box:hover{
+  background-color: black;
+  color:white;
+}
+.pg-address-box:hover .pg-address-box-p{
+  color:white;
+}
 
-  }
-
-  .room-number-btntype{
+.room-number-btntype{
     position: relative;
     top: 9px;
     color: '#055072';
     text-align:center;
-  }
+}
 
-  .del-btn-room{
+.del-btn-room{
     position: relative;
     left: 6rem;
     color: rgb(202, 27, 27);
     transform: scale(0.8);
-  } 
+} 
 
-  .property-details{
+.property-details{
     text-align: left;
-  }
+}
   

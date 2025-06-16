@@ -122,6 +122,10 @@ const VendorDashboard = () => {
         navigate('/owners-menu');
     };
 
+    const handlePendingPayments = () => {
+        navigate('/pending-payments');
+    };
+
     return (
         <div className="dashboard-container">
 
@@ -139,7 +143,7 @@ const VendorDashboard = () => {
             <section className="recent-payments-section">
                 {payments.length > 0 ? <h2 className="section-title">Recent Payments</h2> : ''}
                 <div className="payment-list">
-                    {payments.map((payment) => (
+                    {payments.slice(0, 5).map((payment) => (
                         <PaymentItem
                             key={payment.id}
                             name={payment.tenantName}
@@ -160,6 +164,7 @@ const VendorDashboard = () => {
                     <QuickActionButton icon={<FaComments />} label="Complaints" onClick={handleComplaints} />
                     <QuickActionButton icon={<FaBullhorn />} label="Announcements" onClick={handleAnnouncements} />
                     <QuickActionButton icon={<FaUtensils />} label="Add Menu" onClick={handleMenu} />
+                    <QuickActionButton icon={<GiTakeMyMoney />} label="Pending Payments" onClick={handlePendingPayments} />
                 
                 </div>
             </section>

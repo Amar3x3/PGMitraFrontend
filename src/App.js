@@ -13,14 +13,14 @@ import TenantDashboard from './components/TenantDashboard/TenantDashboard';
 import OwnerComplaints from './components/OwnerComplaints/OwnersComplaints';
 import OwnerDiningMenu from './components/OwnerDiningMenu/OwnerDiningMenu';
 import OwnerAnnouncements from './components/OwnerAnnouncements/OwnerAnnouncements';
-
+import PendingPayments from './components/VendorDashboard/PendingPayments';
+import VendorDashboard from './components/VendorDashboard/vendorDashboard';
 import Splash from './components/splash/splash';
 import Login from './components/Login/login';
 import VendorRegister from './components/VendorRegister/vendorRegister';
 import Role from './components/Roles/role';
 import TenentRegister from './components/TenentRegister/tenentRegister';
 import { AuthProvider } from './context/AuthContext';
-import VendorDashboard from './components/VendorDashboard/vendorDashboard';
 import TenentDashboard from './components/TenentDashboard/tenentDashboard';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -83,6 +83,7 @@ function App() {
               <Route path='/vendor/roomdetails/:roomId/:propertyId' element ={<RoomDetailsPage />}/>
               <Route path='/create-tenant' element={<TenantManager/>}/>
               <Route path='/vendor-payments' element={<PaymentList/>}/>
+              <Route path='/pending-payments' element={<PendingPayments/>}/>
               
             
               {/* <Route path="/create-property" element={<SingleButton icon={<BsBuildingFillAdd />} label="Add Property" onClick={handleAddProperty} />}/> */}

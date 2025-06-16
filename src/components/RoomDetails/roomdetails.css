@@ -42,7 +42,7 @@
 .room-details-section {
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 0px 18px rgba(0, 0, 0, 0.3);
     padding: 20px;
     margin-bottom: 30px; 
 }
@@ -54,7 +54,7 @@
     margin-top: 0;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #eee; 
+    border-bottom: 1px solid black; 
 }
 
 
@@ -63,7 +63,7 @@
     justify-content: space-between;
     align-items: flex-start; 
     padding: 12px 0; 
-    border-bottom: 1px solid #f9f9f9; 
+    border-bottom: 1px solid  black; 
 }
 
 .room-detail-item:last-child {
@@ -135,22 +135,22 @@
 }
 
 .edit-button {
-    background-color: #f8f9fa;
-    color: #2c3e50;
+    background-color: #0D80F2;;
+    color: white;
     border: 1px solid #dee2e6;
 }
 
 .edit-button:hover {
-    background-color: #e9ecef;
+    transform: scale(1.05);
 }
 
 .add-tenant-button {
-    background-color: #28a745;
+    background-color: #0D80F2;
     color: white;
 }
 
 .add-tenant-button:hover {
-    background-color: #218838;
+    background-color: #0564c4;
 }
 
 .button-content {

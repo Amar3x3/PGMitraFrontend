@@ -288,6 +288,30 @@ const searchTenantsByCompany = async (ownerId, company, token) => {
     }
 };
 
+// Get all pending payments for the owner
+const getPendingPayments = async () => {
+    try {
+        const response = await api.get('/payment/pending');
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching pending payments:', error);
+        throw new Error('Failed to fetch pending payments');
+    }
+};
+
+// Mark a payment as complete
+const completePayment = async (paymentId) => {
+    try {
+        const response = await api.put(`/payment/complete/${paymentId}`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error completing payment:', error);
+        throw new Error('Failed to complete payment');
+    }
+};
+
 export default {
     createProperty,
     getProperty,
@@ -303,5 +327,7 @@ export default {
     setDueDate,
     deleteProperty,
     searchTenantsByState,
-    searchTenantsByCompany
+    searchTenantsByCompany,
+    getPendingPayments,
+    completePayment
 };

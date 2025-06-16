@@ -118,7 +118,7 @@ const PropertyList = () => {
                                 >
                                     {/* <strong>{property.propId}</strong> */}
                                     <strong>{property.name}</strong>
-                                    <p style={{ margin: '5px 0 0 0', color: '#555' }}>{property.address}</p>
+                                    <p className='pg-address-box-p' style={{margin: '5px 0 0 0'}}>{property.address}</p>
                                 </li>
                             ))}
                         </ul>

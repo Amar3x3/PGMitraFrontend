@@ -1,3 +1,53 @@
+.vendor-dashboard {
+    font-family: 'Manrope', sans-serif;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.payment-list {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.payment-item {
+    font-family: 'Manrope', sans-serif;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-info h3 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+}
+
+.payment-info p {
+    font-family: 'Manrope', sans-serif;
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.payment-amount {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    color: #2c5282;
+}
 
 .dashboard-container {
     display: flex;
@@ -95,33 +145,12 @@
 }
 
 
-.section-title {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #055072;
-    /* margin-bottom: 20px; */
-    text-align: left;
-}
-
-
 .recent-payments-section {
     /* margin-bottom: 15px; */
     /* position: relative;
     bottom: 5rem; */
     margin-top: -5rem;
     
-}
-
-.payment-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.payment-item {
-    display: flex;
-    align-items: center;
-    padding-bottom: 23px;
-    /* padding: 15px 20px; */
 }
 
 .payment-avatar {
@@ -131,11 +160,6 @@
     margin-right: 15px;
     object-fit: cover;
     background-color: white;
-}
-
-.payment-details {
-    flex-grow: 1;
-    text-align: left;
 }
 
 .payment-name {
@@ -149,9 +173,34 @@
     color: #000000;
     margin: 3px 0 0 0;
 }
-
-.payment-amount {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #055072; 
+.quick-action-button{
+    background-color:white;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+.quick-action-button:hover{
+    background-color: black;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+.quick-action-button:hover .quick-action-icon{
+    color: white;
+    transition: all 0.3s ease;
+}
+.quick-action-button:hover .quick-action-label{
+    color: white;
+    transition: all 0.3s ease;
+}
+.quick-action-icon{
+    color: black;
+    font-size: 20px;
+    margin-right: 10px;
 }

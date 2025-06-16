@@ -154,22 +154,20 @@ const TenantManager = () => {
                     ) : tenants.length === 0 ? (
                         <p>No tenants found. Add one!</p>
                     ) : (
-                        <ul style={{ listStyle: 'none', padding: 0 }} >
+                        <div>
                             {tenants.map((tenant) => (
-                                <li
+                                <div
                                     key={tenant.id}
                                     className='pg-address-box'
+                                    onClick={() => handleNaviagteToRoomDetails(tenant.room_id, tenant.property_id)}
                                     
                                 >
                                     <strong>{tenant.name}</strong>
                                     <p>Phone: {tenant.phone}</p>
-                                    <p>Company: {tenant.companyName || 'Not specified'}</p>
-                                    <p>Home Address: {tenant.homeAddress || 'Not specified'}</p>
-                                    <button onClick={() => handleNaviagteToRoomDetails(tenant.room_id, tenant.property_id)}>View Room Details</button>
-                                </li>
+                                </div>
                                 
                             ))}
-                        </ul>
+                        </div>
                     )}
                 </section>
                

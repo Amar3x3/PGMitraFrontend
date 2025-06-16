@@ -143,9 +143,9 @@ const RoomDetailsPage = () => {
                 <div className="details-list">
                     <RoomDetailItem label="Room Number" value={room.room_no} />
                     <RoomDetailItem label="Capacity" value={room.capacity} />
-                    <RoomDetailItem label="Rent" value={`$${room.rent}`} />
+                    <RoomDetailItem label="Rent" value={`Rs ${room.rent}`} />
                     <RoomDetailItem label="Occupied" value={room.occupied} />
-                    <RoomDetailItem label="Status"  value={room.capacity === room.occupied ? 'Not Available' : 'Available'} />
+                    <RoomDetailItem label="Status" style={{color: room.capacity === room.occupied ? 'red' : 'green'}}  value={room.capacity === room.occupied ? 'Not Available' : 'Available'} />
                 </div>
             </section>
 

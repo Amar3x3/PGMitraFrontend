@@ -8,6 +8,7 @@ import useAuth from '../../hooks/useAuth';
 import vendorService from '../../services/vendorService';
 import { useProperty } from '../contexts/PropertyContext';
 import { FaTrash } from "react-icons/fa6";
+import './propertyModel.css';
 
 const PropertyManage = () => {
 
@@ -150,7 +151,7 @@ const PropertyManage = () => {
                                 <li key={property.propId} className='pg-address-box' >
                                     <div className='property-details'>
                                         <strong>{property.name}</strong>
-                                        <p style={{ margin: '5px 0 0 0', color: '#555' }}>{property.address}</p>
+                                        <p  className='pg-address-box-p' style={{ margin: '5px 0 0 0'}}>{property.address}</p>
                                     </div>
 
                                     <div className='del-btn-property' onClick={() => handleDeleteProperty(property.propId, property.name)}><FaTrash /></div>

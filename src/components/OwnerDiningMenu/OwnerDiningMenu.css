@@ -3,7 +3,9 @@
   font-family: sans-serif;
   position: relative;
 }
-
+.dining-container .profile-header-pro{
+  top: -17%;
+}
 .date-picker {
   padding: 8px;
   font-size: 16px;
