@@ -53,7 +53,7 @@ Welcome to the **PGMitraFrontend**, a responsive and modern web application buil
 - Edit/add room details (UI)
 
 ### 🌐 UI/UX
-- Responsive layout using **Tailwind CSS**
+- Responsive layout using **CSS**
 - Navigation with **React Router DOM**
 - Icons from **Lucide React**
 
