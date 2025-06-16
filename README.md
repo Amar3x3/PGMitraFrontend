@@ -170,9 +170,7 @@ Password: admin123
 
 ⚠️ Better error handling & UX feedback
 
-🤝 Contributing
-Contributions are welcome! 💡
-Please fork the repo, create a branch, and submit a pull request with improvements or new features.
+
 
 
 
